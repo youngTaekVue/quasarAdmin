@@ -2,8 +2,8 @@
   <q-item
     clickable
     tag="a"
-
-    :to="to"
+    target="_blank"
+    :href="link"
   >
     <q-item-section
       v-if="icon"
@@ -35,7 +35,7 @@ export default defineComponent({
       default: ''
     },
 
-    to: {
+    link: {
       type: String,
       default: '#'
     },
