@@ -13,6 +13,12 @@
   </div>
   <div class="q-pa-xs">
     <div class="row">
+      <ApexLineChart />
+      <ChartjsBarChart />
+    </div>
+  </div>
+  <div class="q-pa-xs">
+    <div class="row">
       <div class="col-12 col-xs-12 col-md-6 q-pa-sm">
         <q-table
           title="Treats"
@@ -20,20 +26,6 @@
           :columns="columns"
           row-key="name"
         />
-      </div>
-      <div class="col-12 col-xs-12 col-md-6 q-pa-sm">
-        <q-card class="my-card">
-          <q-card-section>
-            <div id="chart">
-              <apexchart
-                type="line"
-                height="350"
-                :options="chartOptions"
-                :series="series"
-              ></apexchart>
-            </div>
-          </q-card-section>
-        </q-card>
       </div>
     </div>
   </div>
@@ -43,6 +35,8 @@
 import { useQuasar } from "quasar";
 import { ref } from "vue";
 import DashCard from "components/DashCard.vue";
+import ApexLineChart from "src/components/charts/ApexLineChart.vue";
+import ChartjsBarChart from "src/components/charts/ChartjsBarChart.vue";
 
 const $q = useQuasar();
 
@@ -208,38 +202,4 @@ const rows = [
     iron: "6%",
   },
 ];
-
-const series = [
-  {
-    name: "Desktops",
-    data: [10, 41, 35, 51, 49, 62, 69, 91, 148],
-  },
-];
-const chartOptions = {
-  chart: {
-    type: "line",
-    zoom: {
-      enabled: false,
-    },
-  },
-  dataLabels: {
-    enabled: false,
-  },
-  stroke: {
-    curve: "straight",
-  },
-  title: {
-    text: "Product Trends by Month",
-    align: "left",
-  },
-  grid: {
-    row: {
-      colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
-      opacity: 0.5,
-    },
-  },
-  xaxis: {
-    categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"],
-  },
-};
 </script>

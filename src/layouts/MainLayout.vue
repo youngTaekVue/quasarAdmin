@@ -48,10 +48,16 @@ const linksList = [
     to: "/",
   },
   {
-    title: "Github",
-    caption: "github.com/quasarframework",
+    title: "CardPoket",
+    caption: "portfolio/CardPoket",
     icon: "code",
-    to: "/CardPoket",
+    to: "/portfolio/CardPoket",
+  },
+  {
+    title: "CustomTable",
+    caption: "portfolio/CustomTable",
+    icon: "code",
+    to: "/portfolio/CustomTable",
   },
 ];
 
