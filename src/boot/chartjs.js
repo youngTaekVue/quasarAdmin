@@ -1,6 +1,7 @@
 import { boot } from "quasar/wrappers";
-import VueChartJs from "vue-chartjs";
+import { Chart, registerables } from "chart.js";
 
-export default boot(({ app }) => {
-    app.use(VueChartJs);
-});
+Chart.register(...registerables);
+
+export default boot(({ app }) => {});
+export { Chart, registerables };

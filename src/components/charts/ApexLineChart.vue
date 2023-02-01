@@ -1,10 +1,14 @@
 <template>
   <div class="col-12 col-xs-12 col-md-6 q-pa-sm">
-    <q-card class="my-card">
+    <q-card class="my-card fit">
+      <q-bar class="bg-grey-8 text-white">
+        <q-btn dense flat :icon="fabApple" />
+        <div class="text-weight-bold">ApexChart - Page Statistics</div>
+        <q-space />
+      </q-bar>
       <q-card-section>
         <apexchart
           type="line"
-          height="350"
           :options="lineChartOp"
           :series="lineSeries"
         ></apexchart>
@@ -44,10 +48,7 @@ const lineChartOp = {
     curve: "straight",
     dashArray: [0, 8, 5],
   },
-  title: {
-    text: "Page Statistics",
-    align: "left",
-  },
+
   legend: {
     tooltipHoverFormatter: function (val, opts) {
       return (

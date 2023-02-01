@@ -27,11 +27,12 @@ $warning: #f2c037;
 
 @media (min-width: 992px) {
     .q-drawer-container .q-drawer.q-drawer--left {
-        margin: 20px 0 0 20px;
-        padding: 13px 20px;
-        height: calc(100vh - 20px);
         background: 0 0 !important;
     }
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
 
 // box-shadow: 0 20px 27px rgb(0 0 0 / 5%);

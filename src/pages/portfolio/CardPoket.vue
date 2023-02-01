@@ -9,11 +9,11 @@
     >
       <q-card-section>
         <div class="text-overline text-orange-9">Overline</div>
-        <q-img class="cursor-pointer" :src="item.imageUrl" :ratio="16 / 20">
+        <!-- <q-img class="cursor-pointer" :src="item.imageUrl" :ratio="16 / 20">
           <div class="text-subtitle2 absolute-bottom text-center">
             <div class="text-h5 q-mt-sm q-mb-xs ellipsis">{{ item.name }}</div>
           </div>
-        </q-img>
+        </q-img> -->
 
         <div class="text-caption text-grey ellipsis">
           {{ item.imageUrl }}

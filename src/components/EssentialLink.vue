@@ -1,14 +1,13 @@
 <template>
-  <q-item clickable tag="a" :to="link">
-    <q-avatar
-      rounded
-      color="primary"
-      text-color="white"
-      :icon="icon"
-      size="2.5rem"
-    />
-    <q-item-section class="text-center text-h6"> {{ title }} </q-item-section>
-  </q-item>
+  <q-item-label header> {{ title }}</q-item-label>
+  <div v-for="idx in childrens" :key="idx.title" v-bind="idx">
+    <q-item clickable tag="a" :to="idx.link">
+      <q-avatar rounded color="grey-1" :icon="idx.icon" size="3.0rem" />
+      <q-item-section class="q-pl-sm">
+        {{ idx.title }}
+      </q-item-section>
+    </q-item>
+  </div>
 </template>
 
 <script>
@@ -19,12 +18,6 @@ export default defineComponent({
   props: {
     title: {
       type: String,
-      required: true,
-    },
-
-    caption: {
-      type: String,
-      default: "",
     },
 
     link: {
@@ -35,6 +28,12 @@ export default defineComponent({
     icon: {
       type: String,
       default: "",
+    },
+
+    childrens: {
+      type: String,
+      default: "",
+      required: true,
     },
   },
 });

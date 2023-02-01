@@ -27,6 +27,7 @@
           row-key="name"
         />
       </div>
+      <div class="col-12 col-xs-12 col-md-6 q-pa-sm"></div>
     </div>
   </div>
 </template>
@@ -37,8 +38,6 @@ import { ref } from "vue";
 import DashCard from "components/DashCard.vue";
 import ApexLineChart from "src/components/charts/ApexLineChart.vue";
 import ChartjsBarChart from "src/components/charts/ChartjsBarChart.vue";
-
-const $q = useQuasar();
 
 const array = [
   {
