@@ -1,8 +1,20 @@
 <template>
   <q-item-label header> {{ title }}</q-item-label>
-  <div v-for="idx in childrens" :key="idx.title" v-bind="idx">
-    <q-item clickable tag="a" :to="idx.link">
-      <q-avatar rounded color="grey-1" :icon="idx.icon" size="3.0rem" />
+  <div class="q-mb-lg">
+    <q-item
+      clickable
+      tag="a"
+      :to="idx.to"
+      v-for="idx in childrens"
+      :key="idx.title"
+      v-bind="idx"
+    >
+      <q-avatar
+        class="bg-white shadow-1"
+        rounded
+        :icon="idx.icon"
+        size="2.5rem"
+      />
       <q-item-section class="q-pl-sm">
         {{ idx.title }}
       </q-item-section>
@@ -33,7 +45,6 @@ export default defineComponent({
     childrens: {
       type: String,
       default: "",
-      required: true,
     },
   },
 });

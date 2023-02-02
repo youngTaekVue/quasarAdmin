@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf ">
-    <q-header reveal bordered class="bg-grey-1 text-grey-9">
+    <q-header reveal no-border class="bg-grey-1 text-grey-9">
       <q-toolbar>
         <q-btn
           flat
@@ -37,8 +37,13 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above class="bg-white">
-      <q-list class="q-pa-md">
+    <q-drawer
+      v-model="leftDrawerOpen"
+      show-if-above
+      class="bg-grey-1"
+      :width="250"
+    >
+      <q-list class="q-pa-lg">
         <EssentialLink
           v-for="link in essentialLinks"
           :key="link.id"
@@ -74,31 +79,44 @@ linksList.value = [
     title: "Essential Links",
     childrens: [
       {
-        title: "Docs",
-        icon: "school",
+        title: "홈",
+        icon: "home",
         to: "/",
       },
     ],
   },
   {
     id: 2,
+    title: "Components",
+    childrens: [
+      {
+        title: "CardPoket",
+        icon: "credit_card",
+        to: "/components/CardPoket",
+      },
+      {
+        title: "CustomTable",
+        icon: "table_view",
+        to: "/components/CustomTable",
+      },
+    ],
+  },
+  {
+    id: 3,
     title: "Portfolio",
     childrens: [
       {
         title: "CardPoket",
-        caption: "portfolio/CardPoket",
         icon: "code",
         to: "/portfolio/CardPoket",
       },
       {
         title: "CustomTable",
-        caption: "portfolio/CustomTable",
         icon: "code",
         to: "/portfolio/CustomTable",
       },
       {
         title: "CardPoket",
-        caption: "portfolio/CardPoket",
         icon: "code",
         to: "/portfolio/CardPoket",
       },

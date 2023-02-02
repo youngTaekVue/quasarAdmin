@@ -9,6 +9,22 @@ const routes = [{
         }, ],
     },
     {
+        path: "/components",
+        component: () =>
+            import ("layouts/MainLayout.vue"),
+        children: [{
+                path: "/components/CardPoket",
+                component: () =>
+                    import ("pages/components/CardPoket.vue"),
+            },
+            {
+                path: "/components/CustomTable",
+                component: () =>
+                    import ("pages/components/CustomTable.vue"),
+            },
+        ],
+    },
+    {
         path: "/portfolio",
         component: () =>
             import ("layouts/MainLayout.vue"),

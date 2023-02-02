@@ -19,7 +19,7 @@
   </div>
   <div class="q-pa-xs">
     <div class="row">
-      <div class="col-12 col-xs-12 col-md-6 q-pa-sm">
+      <div class="col-12 col-xs-12 col-md-8 q-pa-sm">
         <q-table
           title="Treats"
           :rows="rows"
@@ -27,7 +27,7 @@
           row-key="name"
         />
       </div>
-      <div class="col-12 col-xs-12 col-md-6 q-pa-sm"></div>
+      <div class="col-12 col-xs-12 col-md-4 q-pa-sm"></div>
     </div>
   </div>
 </template>
