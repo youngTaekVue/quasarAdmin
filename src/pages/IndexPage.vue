@@ -20,6 +20,10 @@
   <div class="q-pa-xs">
     <div class="row">
       <div class="col-12 col-xs-12 col-md-8 q-pa-sm">
+        <q-bar class="bg-grey-8 text-white">
+          <div class="text-weight-bold">TEST - Table</div>
+          <q-space />
+        </q-bar>
         <q-table
           title="Treats"
           :rows="rows"
@@ -33,11 +37,13 @@
 </template>
 
 <script setup>
-import { useQuasar } from "quasar";
-import { ref } from "vue";
+import { Screen } from "quasar";
+import { ref, watch } from "vue";
 import DashCard from "components/DashCard.vue";
-import ApexLineChart from "src/components/charts/ApexLineChart.vue";
-import ChartjsBarChart from "src/components/charts/ChartjsBarChart.vue";
+import ApexLineChart from "components/charts/ApexLineChart.vue";
+import ChartjsBarChart from "components/charts/ChartjsBarChart.vue";
+
+const test = ref(Screen.lt.xl);
 
 const array = [
   {

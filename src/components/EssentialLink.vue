@@ -23,10 +23,9 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, defineAsyncComponent } from "vue";
 
 export default defineComponent({
-  name: "EssentialLink",
   props: {
     title: {
       type: String,
@@ -43,7 +42,7 @@ export default defineComponent({
     },
 
     childrens: {
-      type: String,
+      children: String,
       default: "",
     },
   },

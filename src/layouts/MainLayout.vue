@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf ">
+  <q-layout view="lHh Lpr lFf">
     <q-header reveal no-border class="bg-grey-1 text-grey-9">
       <q-toolbar>
         <q-btn
@@ -46,7 +46,7 @@
       <q-list class="q-pa-lg">
         <EssentialLink
           v-for="link in essentialLinks"
-          :key="link.id"
+          :key="link.title"
           v-bind="link"
         />
       </q-list>
@@ -55,7 +55,6 @@
     <q-page-container class="bg-grey-1">
       <q-scroll-area
         class="window-height"
-        :visible="visible"
         :thumb-style="thumbStyle"
         :bar-style="barStyle"
       >
@@ -75,7 +74,6 @@ const linksList = ref();
 
 linksList.value = [
   {
-    id: 1,
     title: "Essential Links",
     childrens: [
       {
@@ -86,7 +84,6 @@ linksList.value = [
     ],
   },
   {
-    id: 2,
     title: "Components",
     childrens: [
       {
@@ -102,7 +99,6 @@ linksList.value = [
     ],
   },
   {
-    id: 3,
     title: "Portfolio",
     childrens: [
       {

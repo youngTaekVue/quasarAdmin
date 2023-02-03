@@ -2,7 +2,6 @@
   <div class="col-12 col-xs-12 col-md-6 q-pa-sm">
     <q-card class="my-card fit">
       <q-bar class="bg-grey-8 text-white">
-        <q-btn dense flat :icon="fabApple" />
         <div class="text-weight-bold">ApexChart - Page Statistics</div>
         <q-space />
       </q-bar>
