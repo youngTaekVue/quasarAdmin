@@ -20,16 +20,22 @@
   <div class="q-pa-xs">
     <div class="row">
       <div class="col-12 col-xs-12 col-md-8 q-pa-sm">
-        <q-bar class="bg-grey-8 text-white">
+        <q-card class="my-card fit">
+          <q-bar class="bg-grey-8 text-white">
+            <div class="text-weight-bold">TEST - Table</div>
+            <q-space />
+          </q-bar>
+          <q-table
+            title="Treats"
+            :rows="rows"
+            :columns="columns"
+            row-key="name"
+          />
+        </q-card>
+        <!-- <q-bar class="bg-grey-8 text-white">
           <div class="text-weight-bold">TEST - Table</div>
           <q-space />
-        </q-bar>
-        <q-table
-          title="Treats"
-          :rows="rows"
-          :columns="columns"
-          row-key="name"
-        />
+        </q-bar> -->
       </div>
       <div class="col-12 col-xs-12 col-md-4 q-pa-sm"></div>
     </div>
