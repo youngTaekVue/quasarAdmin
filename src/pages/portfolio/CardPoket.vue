@@ -70,6 +70,7 @@ function getPoketList() {
     .get("https://pokeapi.co/api/v2/pokemon?limit=50&offset=0")
     .then(function (response) {
       arrTarget = response.data.results;
+      console.log(arrTarget);
       setPoketImage(arrTarget);
     });
 }

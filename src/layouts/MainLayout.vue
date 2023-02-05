@@ -51,16 +51,15 @@
         />
       </q-list>
     </q-drawer>
-
-    <q-page-container class="bg-grey-1">
-      <q-scroll-area
-        class="window-height"
-        :thumb-style="thumbStyle"
-        :bar-style="barStyle"
-      >
+    <q-scroll-area
+      class="window-height"
+      :thumb-style="thumbStyle"
+      :bar-style="barStyle"
+    >
+      <q-page-container class="bg-grey-1 window-height">
         <router-view />
-      </q-scroll-area>
-    </q-page-container>
+      </q-page-container>
+    </q-scroll-area>
   </q-layout>
 </template>
 
@@ -87,9 +86,9 @@ linksList.value = [
     title: "Components",
     childrens: [
       {
-        title: "CardPoket",
+        title: "QuasarCard",
         icon: "credit_card",
-        to: "/components/CardPoket",
+        to: "/components/QuasarCard",
       },
       {
         title: "CustomTable",
