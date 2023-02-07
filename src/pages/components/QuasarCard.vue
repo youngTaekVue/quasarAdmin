@@ -8,14 +8,10 @@
   </div>
   <div class="q-pa-xs">
     <div class="row">
-      <div class="col-12 col-xs-12 col-md-12 q-pa-sm">
-        <div class="row">
-          <ShinHan />
-        </div>
-      </div>
+      <Cardtype1 />
     </div>
   </div>
 </template>
 <script setup>
-import ShinHan from "src/components/card/Cardtype1.vue";
+import Cardtype1 from "src/components/card/Cardtype1.vue";
 </script>

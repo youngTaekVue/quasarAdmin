@@ -60,10 +60,6 @@ onMounted(() => {
   getPoketList();
 });
 
-// function expand() {
-//   console.log("test");
-// }
-
 function getPoketList() {
   let arrTarget = "";
   api
