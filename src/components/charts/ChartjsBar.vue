@@ -16,7 +16,12 @@ import { Bar } from "vue-chartjs";
 
 const props = defineProps({
   items: {
-    type: Array,
+    name: {
+      type: Array,
+    },
+    data: {
+      type: Array,
+    },
   },
 });
 

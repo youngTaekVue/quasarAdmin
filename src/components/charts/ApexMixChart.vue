@@ -69,7 +69,7 @@ const chartOptions = {
     "12 Jan",
   ],
   markers: {
-    size: 3,
+    size: 5,
   },
   xaxis: {
     type: "datetime",
