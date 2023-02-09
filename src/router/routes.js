@@ -21,6 +21,10 @@ const routes = [
         path: "/components/CustomTable",
         component: () => import("pages/components/CustomTable.vue"),
       },
+      {
+        path: "/components/ApexChart",
+        component: () => import("pages/components/ApexChart.vue"),
+      },
     ],
   },
   {

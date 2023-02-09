@@ -13,9 +13,40 @@
   </div>
   <div class="q-pa-xs">
     <div class="row">
-      <ApexLineChart :items="apexChartData" />
-
-      <ChartjsBarChart />
+      <div class="col-12 col-xs-12 col-md-6 q-pa-sm">
+        <ApexLineChart :items="apexChartData" />
+      </div>
+      <div class="col-12 col-xs-12 col-md-6 q-pa-sm">
+        <ChartjsBarChart :items="chartJsData" />
+      </div>
+    </div>
+  </div>
+  <div class="q-pa-xs">
+    <div class="row">
+      <div class="col-12 col-xs-12 col-md-12 q-pa-sm">
+        <q-table
+          :rows="rows"
+          :columns="columns"
+          row-key="name"
+          :filter="filter"
+          :hide-header="scMd"
+          :grid="scMd"
+        >
+          <template v-slot:top-right>
+            <q-input
+              borderless
+              dense
+              debounce="300"
+              v-model="filter"
+              placeholder="Search"
+            >
+              <template v-slot:append>
+                <q-icon name="search" />
+              </template>
+            </q-input>
+          </template>
+        </q-table>
+      </div>
     </div>
   </div>
 </template>
@@ -27,14 +58,15 @@ import DashCard from "components/DashCard.vue";
 import ApexLineChart from "components/charts/ApexLineChart.vue";
 import ChartjsBarChart from "components/charts/ChartjsBarChart.vue";
 
-const test = ref(Screen.lt.xl);
-
+const scMd = ref(Screen.lt.md);
 function randomData() {
-  const rand_0_99 = Math.floor(Math.random() * 100);
+  const rand_0_99 = Math.floor(Math.random() * 1000);
   return rand_0_99;
 }
 
 const apexChartData = ref();
+const chartJsData = ref();
+
 apexChartData.value = [
   {
     name: "Session Duration",
@@ -46,11 +78,56 @@ apexChartData.value = [
       randomData(),
       randomData(),
       randomData(),
+      randomData(),
+      randomData(),
+      randomData(),
+      randomData(),
+      randomData(),
     ],
   },
   {
-    title: "2015",
-    count: [
+    name: "Page Views",
+    data: [
+      randomData(),
+      randomData(),
+      randomData(),
+      randomData(),
+      randomData(),
+      randomData(),
+      randomData(),
+      randomData(),
+      randomData(),
+      randomData(),
+      randomData(),
+      randomData(),
+    ],
+  },
+  {
+    name: "User Visits",
+    data: [
+      randomData(),
+      randomData(),
+      randomData(),
+      randomData(),
+      randomData(),
+      randomData(),
+      randomData(),
+      randomData(),
+      randomData(),
+      randomData(),
+      randomData(),
+      randomData(),
+    ],
+  },
+];
+
+chartJsData.value = [
+  {
+    labels: [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023],
+    data: [
+      randomData(),
+      randomData(),
+      randomData(),
       randomData(),
       randomData(),
       randomData(),
@@ -82,6 +159,90 @@ const array = [
     id: "4",
     name: "calories4",
     body: "center4",
+  },
+];
+
+const columns = [
+  {
+    name: "desc",
+    required: true,
+    label: "Dessert (100g serving)",
+    align: "left",
+    field: (row) => row.name,
+    format: (val) => `${val}`,
+    sortable: true,
+  },
+  {
+    name: "calories",
+    align: "center",
+    label: "Calories",
+    field: "calories",
+    sortable: true,
+  },
+  { name: "fat", label: "Fat (g)", field: "fat", sortable: true },
+  { name: "carbs", label: "Carbs (g)", field: "carbs" },
+];
+
+const rows = [
+  {
+    name: "Frozen Yogurt",
+    calories: 159,
+    fat: 6.0,
+    carbs: 24,
+  },
+  {
+    name: "Ice cream sandwich",
+    calories: 237,
+    fat: 9.0,
+    carbs: 37,
+  },
+  {
+    name: "Eclair",
+    calories: 262,
+    fat: 16.0,
+    carbs: 23,
+  },
+  {
+    name: "Cupcake",
+    calories: 305,
+    fat: 3.7,
+    carbs: 67,
+  },
+  {
+    name: "Gingerbread",
+    calories: 356,
+    fat: 16.0,
+    carbs: 49,
+  },
+  {
+    name: "Jelly bean",
+    calories: 375,
+    fat: 0.0,
+    carbs: 94,
+  },
+  {
+    name: "Lollipop",
+    calories: 392,
+    fat: 0.2,
+    carbs: 98,
+  },
+  {
+    name: "Honeycomb",
+    calories: 408,
+    fat: 3.2,
+    carbs: 87,
+  },
+  {
+    name: "Donut",
+    calories: 452,
+    fat: 25.0,
+    carbs: 51,
+  },
+  {
+    name: "KitKat",
+    calories: 518,
+    fat: 26.0,
+    carbs: 65,
   },
 ];
 </script>

@@ -21,6 +21,37 @@
     </q-item>
   </div>
 </template>
+<!-- 
+<script setup>
+import { ref, defineProps } from "vue";
+
+const childrens = defineProps({
+  essentialLinks: {
+    title: {
+      type: String,
+    },
+
+    to: {
+      type: String,
+      default: "#",
+    },
+
+    icon: {
+      type: String,
+      default: "",
+    },
+
+    childrens: {
+      children: String,
+      default: "",
+    },
+  },
+});
+
+console.log(childrens);
+</script> -->
+
+
 
 <script>
 import { defineComponent } from "vue";

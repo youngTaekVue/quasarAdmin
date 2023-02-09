@@ -52,11 +52,11 @@
       </q-list>
     </q-drawer>
     <q-scroll-area
-      class="window-height"
+      class="bg-grey-1 window-height"
       :thumb-style="thumbStyle"
       :bar-style="barStyle"
     >
-      <q-page-container class="bg-grey-1 window-height">
+      <q-page-container class="window-height">
         <router-view />
       </q-page-container>
     </q-scroll-area>
@@ -94,6 +94,11 @@ linksList.value = [
         title: "CustomTable",
         icon: "table_view",
         to: "/components/CustomTable",
+      },
+      {
+        title: "ApexChart",
+        icon: "table_view",
+        to: "/components/ApexChart",
       },
     ],
   },

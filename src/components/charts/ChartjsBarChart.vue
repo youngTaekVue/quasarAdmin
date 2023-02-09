@@ -1,27 +1,30 @@
 <template>
-  <div class="col-12 col-xs-12 col-md-6 q-pa-sm">
-    <q-card class="my-card fit">
-      <q-bar class="bg-grey-8 text-white">
-        <div class="text-weight-bold">vue-chartjs - Page Statistics</div>
-        <q-space />
-      </q-bar>
-      <q-card-section>
-        <Bar
-          class="fit"
-          id="my-chart-id"
-          :options="barChartOp"
-          :data="barData"
-        />
-      </q-card-section>
-    </q-card>
-  </div>
+  <q-card class="my-card fit">
+    <q-bar class="bg-grey-8 text-white">
+      <div class="text-weight-bold">vue-chartjs - Page Statistics</div>
+      <q-space />
+    </q-bar>
+    <q-card-section>
+      <Bar class="fit" id="my-chart-id" :options="barChartOp" :data="barData" />
+    </q-card-section>
+  </q-card>
 </template>
 
 <script setup>
+import { ref, defineProps } from "vue";
 import { Bar } from "vue-chartjs";
 
+const props = defineProps({
+  items: {
+    type: Array,
+  },
+});
+
+const propLabels = ref(props.items[0].labels);
+const propData = ref(props.items[0].data);
+
 const barData = {
-  labels: [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023],
+  labels: propLabels.value,
   datasets: [
     {
       label: "인원수",
@@ -33,7 +36,7 @@ const barData = {
       pointBorderColor: "hotpink",
       borderWidth: 1,
       pointBorderWidth: 1,
-      data: [450, 300, 100, 1000, 750, 600, 900, 1500, 1200, 2000],
+      data: propData.value,
     },
   ],
 };
