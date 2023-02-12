@@ -5,9 +5,8 @@
       :rows="rows"
       :columns="columns"
       row-key="name"
-      :filter="filter"
       hide-header
-      grid
+      :grid="layout"
     >
       <template v-slot:top-right>
         <q-input
@@ -26,8 +25,13 @@
   </div>
 </template>
 
-<script>
-import { ref } from "vue";
+<script setup>
+import { computed, ref } from "vue";
+import { Screen } from "quasar";
+
+const layout = computed(() => {
+  return Screen.lt.sm ? true : Screen.lt.md ? false : false;
+});
 
 const columns = [
   {
@@ -112,14 +116,4 @@ const rows = [
     carbs: 65,
   },
 ];
-
-export default {
-  setup() {
-    return {
-      filter: ref(""),
-      columns,
-      rows,
-    };
-  },
-};
 </script>

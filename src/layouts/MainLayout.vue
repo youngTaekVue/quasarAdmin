@@ -111,6 +111,11 @@ linksList.value = [
         to: "/portfolio/CardPoket",
       },
       {
+        title: "TimeLine",
+        icon: "code",
+        to: "/portfolio/TimeLine",
+      },
+      {
         title: "CustomTable",
         icon: "code",
         to: "/portfolio/CustomTable",

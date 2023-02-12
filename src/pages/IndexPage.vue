@@ -17,7 +17,7 @@
         <ApexLineChart :items="apexChartData" />
       </div>
       <div class="col-12 col-xs-12 col-md-6 q-pa-sm">
-        <ChartjsBarChart :items="chartJsData" />
+        <ChartjsBar :items="chartJsData" />
       </div>
     </div>
   </div>
@@ -30,7 +30,7 @@
           row-key="name"
           :filter="filter"
           :hide-header="scMd"
-          :grid="scMd"
+          :grid="layout"
         >
           <template v-slot:top-right>
             <q-input
@@ -53,20 +53,17 @@
 
 <script setup>
 import { Screen } from "quasar";
-import { ref, watch } from "vue";
+import { ref, computed } from "vue";
 import DashCard from "components/DashCard.vue";
 import ApexLineChart from "components/charts/ApexLineChart.vue";
-import ChartjsBarChart from "components/charts/ChartjsBarChart.vue";
+import ChartjsBar from "components/charts/ChartjsBar.vue";
 
 const scMd = ref(Screen.lt.md);
-function randomData() {
-  const rand_0_99 = Math.floor(Math.random() * 1000);
-  return rand_0_99;
-}
-
 const apexChartData = ref();
 const chartJsData = ref();
-
+const layout = computed(() => {
+  return Screen.lt.sm ? true : Screen.lt.md ? false : false;
+});
 apexChartData.value = [
   {
     name: "Session Duration",
@@ -245,4 +242,9 @@ const rows = [
     carbs: 65,
   },
 ];
+
+function randomData() {
+  const rand_0_99 = Math.floor(Math.random() * 1000);
+  return rand_0_99;
+}
 </script>
