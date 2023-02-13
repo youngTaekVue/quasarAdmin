@@ -2,7 +2,7 @@
   <div class="q-px-lg q-pb-md">
     <q-timeline :layout="layout" color="secondary">
       <q-timeline-entry heading>
-        Timeline heading
+        Timeline heading{{ store.counter }}
         <br />
         ({{
           $q.screen.lt.sm ? "Dense" : $q.screen.lt.md ? "Comfortable" : "Loose"
@@ -125,23 +125,31 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { useQuasar } from "quasar";
 import { computed } from "vue";
+import { useCounterStore } from "stores/counter";
+import { storeToRefs } from "pinia";
 
-export default {
-  setup() {
-    const $q = useQuasar();
+const store = useCounterStore();
 
-    return {
-      layout: computed(() => {
-        return $q.screen.lt.sm
-          ? "dense"
-          : $q.screen.lt.md
-          ? "comfortable"
-          : "loose";
-      }),
-    };
-  },
-};
+// Option 2: use computed and functions to use the store
+const count = computed(() => store.counter);
+const doubleCountValue = computed(() => store.doubleCount);
+const incrementCount = () => store.increment(); // use action
+const decrementCount = () => store.counter--; // manipulate directly
+
+// Option 3: use destructuring to use the store in the template
+const { counter, doubleCount } = storeToRefs(store); // state and getters need "storeToRefs"
+const { increment } = store; // actions can be destructured directly
+
+// const $q = useQuasar();
+
+//   layout =  computed(() => {
+//     return $q.screen.lt.sm
+//       ? "dense"
+//       : $q.screen.lt.md
+//       ? "comfortable"
+//       : "loose";
+//   }),
 </script>
