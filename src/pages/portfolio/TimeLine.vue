@@ -131,6 +131,7 @@ import { computed } from "vue";
 import { useCounterStore } from "stores/counter";
 import { storeToRefs } from "pinia";
 
+const $q = useQuasar();
 const store = useCounterStore();
 
 // Option 2: use computed and functions to use the store
@@ -143,13 +144,11 @@ const decrementCount = () => store.counter--; // manipulate directly
 const { counter, doubleCount } = storeToRefs(store); // state and getters need "storeToRefs"
 const { increment } = store; // actions can be destructured directly
 
-// const $q = useQuasar();
-
-//   layout =  computed(() => {
-//     return $q.screen.lt.sm
-//       ? "dense"
-//       : $q.screen.lt.md
-//       ? "comfortable"
-//       : "loose";
-//   }),
+// layout = computed(() => {
+//   return new $q.screen.lt.sm()
+//     ? "dense"
+//     : $q.screen.lt.md
+//     ? "comfortable"
+//     : "loose";
+// });
 </script>

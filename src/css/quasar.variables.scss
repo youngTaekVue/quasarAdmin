@@ -17,22 +17,3 @@ $positive: #21ba45;
 $negative: #c10015;
 $info: #31ccec;
 $warning: #f2c037;
-.q-list .q-item__label {
-    color: $info;
-}
-
-.q-drawer-container .q-drawer.q-drawer--left {
-    background: #fff !important;
-}
-
-@media (min-width: 992px) {
-    .q-drawer-container .q-drawer.q-drawer--left {
-        background: 0 0 !important;
-    }
-}
-
-::-webkit-scrollbar {
-    display: none;
-}
-
-// box-shadow: 0 20px 27px rgb(0 0 0 / 5%);

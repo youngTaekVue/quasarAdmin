@@ -1,1 +1,36 @@
 // app global css in SCSS form
+.op-xs {
+    opacity: 0.2;
+}
+
+.op-sm {
+    opacity: 0.4;
+}
+
+.op-md {
+    opacity: 0.6;
+}
+
+.op-lg {
+    opacity: 0.8;
+}
+
+.q-list .q-item__label {
+    color: $info;
+}
+
+.q-drawer-container .q-drawer.q-drawer--left {
+    background: #fff !important;
+}
+
+@media (min-width: 992px) {
+    .q-drawer-container .q-drawer.q-drawer--left {
+        background: 0 0 !important;
+    }
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+// box-shadow: 0 20px 27px rgb(0 0 0 / 5%);

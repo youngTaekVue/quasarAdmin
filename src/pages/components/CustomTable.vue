@@ -1,119 +1,99 @@
 <template>
   <div class="q-pa-md">
-    <q-table
-      title="Treats"
-      :rows="rows"
-      :columns="columns"
-      row-key="name"
-      hide-header
-      :grid="layout"
-    >
-      <template v-slot:top-right>
-        <q-input
-          borderless
-          dense
-          debounce="300"
-          v-model="filter"
-          placeholder="Search"
-        >
-          <template v-slot:append>
-            <q-icon name="search" />
-          </template>
-        </q-input>
-      </template>
-    </q-table>
+    <div class="col-12 col-xs-12 col-md-6 col-lg-4 q-pa-sm">
+      <q-card
+        flat
+        bordered
+        class="col-3 col-md-3 bg-grey-1 ellipsis my-card"
+        v-show="show"
+      >
+        <q-bar class="bg-grey-8 text-white">
+          <div class="text-weight-bold">CustomTable - default</div>
+          <q-space />
+        </q-bar>
+        <q-card-section>
+          <q-table
+            row-key="name"
+            :columns="columns"
+            :data="rows"
+            :grid="layout"
+          >
+            <template v-slot:body="props">
+              <q-tr :props="props">
+                <q-td key="name" :props="props">
+                  {{ props.row.albumId }}
+                </q-td>
+                <q-td key="fat" :props="props">
+                  {{ props.row.title }}
+                </q-td>
+                <q-td key="fat" :props="props">
+                  {{ props.row.url }}
+                </q-td>
+                <q-td key="fat" :props="props">
+                  {{ props.row.thumbnailUrl }}
+                </q-td>
+                <q-td key="calories" :props="props">
+                  <q-btn name="delete" label="delete" icon="delete" />
+                </q-td>
+              </q-tr>
+            </template>
+          </q-table>
+
+          <q-pagination
+            v-model="current"
+            color="purple"
+            :max="10"
+            :max-pages="6"
+            boundary-numbers
+          />
+        </q-card-section>
+      </q-card>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { computed, ref } from "vue";
+import { computed, ref, onMounted } from "vue";
 import { Screen } from "quasar";
+import { local } from "boot/axios";
+const rows = ref();
+const show = ref(false);
+const current = ref(6);
+
+onMounted(() => {
+  getRowsList();
+});
+
+function getRowsList() {
+  local.get("/photos").then(function (response) {
+    rows.value = response.data;
+    console.dirxml(rows);
+    show.value = true;
+  });
+  const columns = [
+    {
+      name: "desc",
+      required: true,
+      label: "Dessert (100g serving)",
+      align: "left",
+      classes: "col-12",
+      field: (row) => row.name,
+      format: (val) => `${val}`,
+    },
+    {
+      name: "calories",
+      align: "center",
+      label: "Calories",
+      field: "calories",
+    },
+    { name: "fat", label: "Fat (g)", field: "fat", sortable: true },
+    { name: "carbs", label: "Carbs (g)", field: "carbs" },
+  ];
+}
 
 const layout = computed(() => {
   return Screen.lt.sm ? true : Screen.lt.md ? false : false;
 });
 
-const columns = [
-  {
-    name: "desc",
-    required: true,
-    label: "Dessert (100g serving)",
-    align: "left",
-    field: (row) => row.name,
-    format: (val) => `${val}`,
-    sortable: true,
-  },
-  {
-    name: "calories",
-    align: "center",
-    label: "Calories",
-    field: "calories",
-    sortable: true,
-  },
-  { name: "fat", label: "Fat (g)", field: "fat", sortable: true },
-  { name: "carbs", label: "Carbs (g)", field: "carbs" },
-];
-
-const rows = [
-  {
-    name: "Frozen Yogurt",
-    calories: 159,
-    fat: 6.0,
-    carbs: 24,
-  },
-  {
-    name: "Ice cream sandwich",
-    calories: 237,
-    fat: 9.0,
-    carbs: 37,
-  },
-  {
-    name: "Eclair",
-    calories: 262,
-    fat: 16.0,
-    carbs: 23,
-  },
-  {
-    name: "Cupcake",
-    calories: 305,
-    fat: 3.7,
-    carbs: 67,
-  },
-  {
-    name: "Gingerbread",
-    calories: 356,
-    fat: 16.0,
-    carbs: 49,
-  },
-  {
-    name: "Jelly bean",
-    calories: 375,
-    fat: 0.0,
-    carbs: 94,
-  },
-  {
-    name: "Lollipop",
-    calories: 392,
-    fat: 0.2,
-    carbs: 98,
-  },
-  {
-    name: "Honeycomb",
-    calories: 408,
-    fat: 3.2,
-    carbs: 87,
-  },
-  {
-    name: "Donut",
-    calories: 452,
-    fat: 25.0,
-    carbs: 51,
-  },
-  {
-    name: "KitKat",
-    calories: 518,
-    fat: 26.0,
-    carbs: 65,
-  },
-];
+//const rows ;
 </script>
