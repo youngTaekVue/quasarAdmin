@@ -32,19 +32,6 @@
           :hide-header="scMd"
           :grid="layout"
         >
-          <template v-slot:top-right>
-            <q-input
-              borderless
-              dense
-              debounce="300"
-              v-model="filter"
-              placeholder="Search"
-            >
-              <template v-slot:append>
-                <q-icon name="search" />
-              </template>
-            </q-input>
-          </template>
         </q-table>
       </div>
     </div>

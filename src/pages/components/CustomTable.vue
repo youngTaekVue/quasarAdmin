@@ -12,28 +12,28 @@
           <q-space />
         </q-bar>
         <q-card-section>
-          <q-table
-            row-key="name"
-            :columns="columns"
-            :data="rows"
-            :grid="layout"
-          >
+          <q-table :rows="rows" :grid="layout">
             <template v-slot:body="props">
               <q-tr :props="props">
-                <q-td key="name" :props="props">
+                <q-td key="albumId" :props="props">
                   {{ props.row.albumId }}
                 </q-td>
-                <q-td key="fat" :props="props">
+                <q-td key="title" :props="props">
                   {{ props.row.title }}
                 </q-td>
-                <q-td key="fat" :props="props">
+                <q-td key="url" :props="props">
                   {{ props.row.url }}
                 </q-td>
-                <q-td key="fat" :props="props">
+                <q-td key="thumbnailUrl" :props="props">
                   {{ props.row.thumbnailUrl }}
                 </q-td>
-                <q-td key="calories" :props="props">
-                  <q-btn name="delete" label="delete" icon="delete" />
+                <q-td>
+                  <q-btn
+                    name="delete"
+                    label="delete"
+                    v-on:click="btnDetail()"
+                    icon="delete"
+                  />
                 </q-td>
               </q-tr>
             </template>
@@ -64,31 +64,33 @@ onMounted(() => {
   getRowsList();
 });
 
+function btnDetail() {
+  console.log("test");
+}
+
 function getRowsList() {
+  // const columns = [
+  //   {
+  //     name: "albumId",
+  //     required: true,
+  //     label: "Dessert (100g serving)",
+  //     field: (row) => row.albumId,
+  //     format: (val) => `${val}`,
+  //     sortable: true,
+  //   },
+  //   {
+  //     name: "calories",
+  //     align: "center",
+  //     label: "Calories",
+  //     field: "title",
+  //   },
+  // ];
+
   local.get("/photos").then(function (response) {
     rows.value = response.data;
     console.dirxml(rows);
     show.value = true;
   });
-  const columns = [
-    {
-      name: "desc",
-      required: true,
-      label: "Dessert (100g serving)",
-      align: "left",
-      classes: "col-12",
-      field: (row) => row.name,
-      format: (val) => `${val}`,
-    },
-    {
-      name: "calories",
-      align: "center",
-      label: "Calories",
-      field: "calories",
-    },
-    { name: "fat", label: "Fat (g)", field: "fat", sortable: true },
-    { name: "carbs", label: "Carbs (g)", field: "carbs" },
-  ];
 }
 
 const layout = computed(() => {
