@@ -9,6 +9,7 @@
     >
       <q-card-section>
         <div class="text-overline text-orange-9">Overline</div>
+
         <!-- <q-img class="cursor-pointer" :src="item.imageUrl" :ratio="16 / 20">
           <div class="text-subtitle2 absolute-bottom text-center">
             <div class="text-h5 q-mt-sm q-mb-xs ellipsis">{{ item.name }}</div>
@@ -17,6 +18,7 @@
 
         <div class="text-caption text-grey ellipsis">
           {{ item.imageUrl }}
+          <q-skeleton type="text" />
         </div>
       </q-card-section>
 
@@ -55,6 +57,7 @@ import { api } from "boot/axios";
 
 const poketList = ref(null);
 const expanded = ref(false);
+let skeleton = true;
 
 onMounted(() => {
   getPoketList();
@@ -85,6 +88,7 @@ async function setPoketImage(array) {
         });
     }
   }
+  skeleton = false;
   poketList.value = array;
 }
 </script>

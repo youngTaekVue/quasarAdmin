@@ -106,9 +106,9 @@ linksList.value = [
     title: "Portfolio",
     childrens: [
       {
-        title: "CardPoket",
+        title: "JsonFormat",
         icon: "code",
-        to: "/portfolio/CardPoket",
+        to: "/portfolio/JsonFormat",
       },
       {
         title: "TimeLine",

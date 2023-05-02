@@ -38,7 +38,6 @@
               </q-tr>
             </template>
           </q-table>
-
           <q-pagination
             v-model="current"
             color="purple"
