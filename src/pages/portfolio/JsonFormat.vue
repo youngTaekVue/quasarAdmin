@@ -27,16 +27,6 @@
               :option="options"
               label="Outlined"
             />
-            <!-- <option v-for="(itme, i) in option" :key="i" :value="item.value">
-                {{ item.titel }}
-              </option> -->
-            <!-- <template v-slot:no-option>
-                <q-item>
-                  <q-item-section class="text-grey">
-                    No results
-                  </q-item-section>
-                </q-item>
-              </template> -->
 
             <vue-json-pretty
               :data="getJosn"
