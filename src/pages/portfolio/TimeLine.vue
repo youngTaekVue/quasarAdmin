@@ -1,15 +1,6 @@
 <template>
   <div class="q-px-lg q-pb-md">
-    <q-timeline :layout="layout" color="secondary">
-      <q-timeline-entry heading>
-        Timeline heading{{ store.counter }}
-        <br />
-        ({{
-          $q.screen.lt.sm ? "Dense" : $q.screen.lt.md ? "Comfortable" : "Loose"
-        }}
-        layout)
-      </q-timeline-entry>
-
+    <q-timeline color="secondary">
       <q-timeline-entry
         title="Quasar Framework Study start"
         subtitle="Jan 19, 2023"

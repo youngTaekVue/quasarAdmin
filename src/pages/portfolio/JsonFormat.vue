@@ -26,7 +26,7 @@
             <q-select
               v-model="model"
               outlined
-              :options="options"
+              :options="selOptions"
               @update:model-value="onloadJson($event.value)"
               label="API 항목"
             >
@@ -40,29 +40,38 @@
             </q-select>
             <q-scroll-area style="height: 600px">
               <vue-json-pretty
-                :data="getJosn"
+                v-if="showText"
+                :data="getJosn1"
                 :showIcon="true"
                 :showLength="true"
                 :showLine="false"
                 :show-double-quotes="false"
+                outlined
                 style="position: relative"
-                v-if="showText"
               />
+              <q-inner-loading :showing="spinVisible">
+                <q-spinner-gears size="50px" color="primary" />
+              </q-inner-loading>
             </q-scroll-area>
           </div>
         </q-card>
       </div>
       <div class="col-12 col-xs-12 col-md-6 col-lg-3 q-pa-sm">
         <q-card class="my-card fit q-pa-md">
-          <q-field class="q-pb-sm" borderless label="Outlined" stack-label>
-            <template v-slot:control>
-              <div class="self-center full-width no-outline" tabindex="0">
-                Field content
-              </div>
+          <q-field class="q-pb-sm" borderless placeholder="Placeholder">
+            <template v-slot:append>
+              <q-btn color="primary" label="Compare" @click="jsonCompare()" />
             </template>
           </q-field>
           <q-scroll-area style="height: 600px">
-            <q-input v-model="text" outlined filled autogrow />
+            <q-input v-model="getJosn2" type="textarea" outlined rows="31" />
+          </q-scroll-area>
+        </q-card>
+      </div>
+      <div class="col-12 col-xs-12 col-md-6 col-lg-3 q-pa-sm">
+        <q-card class="my-card fit q-pa-md">
+          <q-scroll-area style="height: 600px">
+            <q-input v-model="result1" type="textarea" outlined rows="31" />
           </q-scroll-area>
         </q-card>
       </div>
@@ -71,17 +80,21 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
 import VueJsonPretty from "vue-json-pretty";
 import "vue-json-pretty/lib/styles.css";
+import { onMounted, ref } from "vue";
 import { useJsonStore } from "stores/custom";
 //import { api } from "boot/axios";
 const model = ref(null);
-const options = ref();
+const selOptions = ref();
 const showText = ref(false);
-let getJosn = ref();
+const spinVisible = ref(false);
 
-options.value = [
+const getJosn1 = ref();
+const getJosn2 = ref();
+const result1 = ref();
+
+selOptions.value = [
   { label: "select option 1", value: "1" },
   { label: "select option 2", value: "2" },
   { label: "select option 3", value: "3" },
@@ -92,12 +105,35 @@ onMounted(() => {
 });
 
 function onloadJson(param) {
-  getJosn.value = "";
+  getJosn1.value = "";
+  spinVisible.value = true;
+
   let store = useJsonStore(param);
   let prettyJson = store.map((items) => {
     return items;
   });
+
   showText.value = true;
-  getJosn.value = prettyJson;
+  spinVisible.value = false;
+  getJosn1.value = prettyJson;
+}
+
+function jsonCompare() {
+  const target1Json = getJosn1.value;
+  const target2Json = getJosn2.value;
+  console.log(JSON.parse(target2Json));
+  // target1Json.forEach((element) => {
+  //   console.log(index);
+  // });
+
+  // if (getJosn1.value == true && getJosn2.value == true) {
+  //   alert("test");
+  //   result1.value = "compare";
+  //   //   return false;
+  // }
+  // if ((test = "")) {
+  //   alert("test");
+  //   return false;
+  // }
 }
 </script>
