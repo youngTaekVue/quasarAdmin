@@ -5,15 +5,12 @@
       <q-breadcrumbs-el label="ApexChart" />
     </q-breadcrumbs>
   </div>
-
   <div class="q-pa-xs">
     <div class="row">
-      <div
-        class="col-12 col-xs-12 col-md-12 col-lg-12 q-pa-sm"
-        style="height: 120px"
-      >
-        <q-card class="my-card fit">
-          <p class="lead">
+      <div class="col-12 col-xs-12 col-md-12 col-lg-12 q-pa-sm">
+        <q-card class="my-card fit q-pa-md">
+          <p class="text-h4 text-center">JSON API Compare</p>
+          <p class="text-body1">
             Below is an example form built entirely with Bootstrap's form
             controls. Each required form group has a validation state that can
             be triggered by attempting to submit the form without completing it.
@@ -42,7 +39,6 @@
               <vue-json-pretty
                 v-if="showText"
                 :data="getJosn1"
-                :showIcon="true"
                 :showLength="true"
                 :showLine="false"
                 :show-double-quotes="false"
@@ -71,7 +67,7 @@
       <div class="col-12 col-xs-12 col-md-6 col-lg-3 q-pa-sm">
         <q-card class="my-card fit q-pa-md">
           <q-scroll-area style="height: 600px">
-            <q-input v-model="result1" type="textarea" outlined rows="31" />
+            <div class="text-body1" id="result1"></div>
           </q-scroll-area>
         </q-card>
       </div>
@@ -92,7 +88,7 @@ const spinVisible = ref(false);
 
 const getJosn1 = ref();
 const getJosn2 = ref();
-const result1 = ref();
+const result1 = "";
 
 selOptions.value = [
   { label: "select option 1", value: "1" },
@@ -108,22 +104,54 @@ function onloadJson(param) {
   getJosn1.value = "";
   spinVisible.value = true;
 
-  let store = useJsonStore(param);
-  let prettyJson = store.map((items) => {
-    return items;
-  });
+  let prettyJson = useJsonStore(param);
 
   showText.value = true;
   spinVisible.value = false;
   getJosn1.value = prettyJson;
+  getJosn2.value = JSON.stringify(prettyJson);
 }
 
 function jsonCompare() {
+  //const objecJson = [];
   const target1Json = getJosn1.value;
-  const target2Json = getJosn2.value;
-  console.log(JSON.parse(target2Json));
-  // target1Json.forEach((element) => {
-  //   console.log(index);
+  const target2Json = getJosn2.value; //object 화 시켰다는 가정하에
+
+  let objecJson = target2Json.split("");
+  console.log(objecJson);
+
+  // let test = target2Json.split("");
+  // for (let i = 0; i < test.length; i++) {
+  //   if (test[i] == "{") {
+  //     console.log("여기");
+  //     test[i] = test[i].replaceAll(/{/g, "!!!!!!");
+  //     console.log(test[i]);
+  //   }
+  // }
+
+  let divCont = "";
+  for (let i = 0; i < objecJson.length; i++) {
+    let conSpan = document.createElement("div");
+    conSpan.setAttribute("id", "value" + objecJson[i]);
+
+    if (objecJson[i] == "{") {
+      objecJson[i] = objecJson[i].replaceAll(/{/g, "{\n'");
+    } else if (objecJson[i] == ":") {
+      objecJson[i] = objecJson[i].replaceAll(/:/g, "':");
+    }
+
+    divCont += objecJson[i];
+
+    console.log(divCont);
+
+    // //result1.push(conSpan);
+    // document.getElementById("result1").appendChild = conSpan;
+  }
+
+  // objecJson.forEach((element) => {
+  //   console.log(element);
+
+  //   result1.value = element;
   // });
 
   // if (getJosn1.value == true && getJosn2.value == true) {
