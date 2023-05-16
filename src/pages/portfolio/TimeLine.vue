@@ -22,77 +22,9 @@
         <div></div>
       </q-timeline-entry>
 
-      <q-timeline-entry heading>November, 2017</q-timeline-entry>
-
-      <q-timeline-entry
-        title="Event Title"
-        subtitle="February 22, 1986"
-        side="left"
-      >
-        <div>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </div>
-      </q-timeline-entry>
-
-      <q-timeline-entry
-        title="Event Title"
-        subtitle="February 22, 1986"
-        side="right"
-      >
-        <div>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </div>
-      </q-timeline-entry>
-
-      <q-timeline-entry
-        title="Event Title"
-        subtitle="February 11, 2023"
-        side="left"
-        color="orange"
-        icon="done_all"
-      >
-        <div>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </div>
-      </q-timeline-entry>
-
-      <q-timeline-entry
-        title="Event Title"
-        subtitle="February 22, 1986"
-        side="right"
-      >
-        <div>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </div>
-      </q-timeline-entry>
-
       <q-timeline-entry
         title="테이블 및 타임라인 반응형"
-        subtitle="February 22, 1986"
+        subtitle="February 22, 2023"
         side="left"
       >
         <div>
@@ -110,6 +42,28 @@
           라이브러리로 구성 요소/페이지 간에 상태를 공유할 수 있습니다.
           Composition API에 익숙하다면 이미 간단한 export const state =
           reactive({})로 전역 상태를 공유가능. Pinia를 봐둬야겠다.
+        </div>
+      </q-timeline-entry>
+      <q-timeline-entry
+        title="Event Title"
+        subtitle="May 15, 2023"
+        side="right"
+      >
+        <div>
+          JSON Formatter를 만드는중<br />
+          1. vue-json-pretty로 호출하고자 하는 json을 불러옴<br />
+          2. 비교하고자 하는 json 또는 text를 입력함.(textarea로 값을 받다보니
+          json parse 처리 후 비교 예정 - 작업중)
+        </div>
+      </q-timeline-entry>
+      <q-timeline-entry
+        title="JSON Formatter"
+        subtitle="May 16, 2023"
+        side="right"
+      >
+        <div>
+          입력값을 넣어 정렬은 했지만..모든 문자열을 자르고 replace 로 변환이
+          아닌 다른 방법이 필요할듯.
         </div>
       </q-timeline-entry>
     </q-timeline>

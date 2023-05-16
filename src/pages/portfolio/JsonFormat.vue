@@ -56,7 +56,12 @@
         <q-card class="my-card fit q-pa-md">
           <q-field class="q-pb-sm" borderless placeholder="Placeholder">
             <template v-slot:append>
-              <q-btn color="primary" label="Compare" @click="jsonCompare()" />
+              <q-btn
+                color="primary"
+                label="Compare"
+                @click="jsonCompare()"
+                style="width: 100%"
+              />
             </template>
           </q-field>
           <q-scroll-area style="height: 600px">
@@ -67,7 +72,15 @@
       <div class="col-12 col-xs-12 col-md-6 col-lg-3 q-pa-sm">
         <q-card class="my-card fit q-pa-md">
           <q-scroll-area style="height: 600px">
-            <div class="text-body1" id="result1"></div>
+            <vue-json-pretty
+              :data="result1"
+              :showLength="true"
+              :showLine="false"
+              :show-double-quotes="false"
+              outlined
+              style="position: relative"
+            />
+            <!-- <q-card v-html="result1"> </q-card> -->
           </q-scroll-area>
         </q-card>
       </div>
@@ -88,7 +101,18 @@ const spinVisible = ref(false);
 
 const getJosn1 = ref();
 const getJosn2 = ref();
-const result1 = "";
+const result1 = ref();
+
+// const getJosn2 = ref(
+//   "[" +
+//     "{" +
+//     "addItem5: null," +
+//     "addItem2: null," +
+//     'addItem1: "1234"' +
+//     "addItem3: null" +
+//     "}" +
+//     "]"
+// );
 
 selOptions.value = [
   { label: "select option 1", value: "1" },
@@ -109,59 +133,63 @@ function onloadJson(param) {
   showText.value = true;
   spinVisible.value = false;
   getJosn1.value = prettyJson;
-  getJosn2.value = JSON.stringify(prettyJson);
 }
 
 function jsonCompare() {
-  //const objecJson = [];
   const target1Json = getJosn1.value;
   const target2Json = getJosn2.value; //object 화 시켰다는 가정하에
 
+  const arrKeyTarget1 = [];
+  const arrKeyTarget2 = [];
+  const arrValTarget2 = [];
+
+  const valueTarget2 = [];
+
   let objecJson = target2Json.split("");
-  console.log(objecJson);
+  let parseData = JSON.parse(getJosnParse(objecJson));
 
-  // let test = target2Json.split("");
-  // for (let i = 0; i < test.length; i++) {
-  //   if (test[i] == "{") {
-  //     console.log("여기");
-  //     test[i] = test[i].replaceAll(/{/g, "!!!!!!");
-  //     console.log(test[i]);
-  //   }
-  // }
+  Object.keys(target1Json[0]).forEach((element) => {
+    arrKeyTarget1.push(element);
+  });
 
-  let divCont = "";
-  for (let i = 0; i < objecJson.length; i++) {
-    let conSpan = document.createElement("div");
-    conSpan.setAttribute("id", "value" + objecJson[i]);
-
-    if (objecJson[i] == "{") {
-      objecJson[i] = objecJson[i].replaceAll(/{/g, "{\n'");
-    } else if (objecJson[i] == ":") {
-      objecJson[i] = objecJson[i].replaceAll(/:/g, "':");
+  for (let [key, value] of Object.entries(parseData[0])) {
+    arrKeyTarget2.push(key);
+    arrValTarget2.push(value);
+  }
+  let pushList = {};
+  for (let j = 0; j < arrKeyTarget1.length; j++) {
+    for (let k = 0; k < arrKeyTarget2.length; k++) {
+      if (arrKeyTarget1[j] == arrKeyTarget2[k]) {
+        pushList[arrKeyTarget2[k]] = arrValTarget2[k];
+        console.dirxml(pushList);
+      }
     }
-
-    divCont += objecJson[i];
-
-    console.log(divCont);
-
-    // //result1.push(conSpan);
-    // document.getElementById("result1").appendChild = conSpan;
   }
 
-  // objecJson.forEach((element) => {
-  //   console.log(element);
+  valueTarget2.push(pushList);
+  result1.value = valueTarget2;
+}
 
-  //   result1.value = element;
-  // });
+// "Repairs common JSON errors by replacing incorrect quotes"
+function getJosnParse(array) {
+  let divCont = "";
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] == "{") {
+      array[i] = array[i].replace("{", '{"');
+    } else if (array[i] == ",") {
+      array[i] = array[i].replace(",", ',"');
+    } else if (array[i] == ":") {
+      array[i] = array[i].replace(":", ":");
+    } else if (array[i] == "\n") {
+      array[i] = array[i].replace("\n", "");
+    } else if (array[i] == " ") {
+      array[i] = array[i].replace(" ", "");
+    }
+    divCont += array[i];
+    console.dirxml(divCont);
+  }
+  divCont = divCont.replace(/,"{"/g, ',{"');
 
-  // if (getJosn1.value == true && getJosn2.value == true) {
-  //   alert("test");
-  //   result1.value = "compare";
-  //   //   return false;
-  // }
-  // if ((test = "")) {
-  //   alert("test");
-  //   return false;
-  // }
+  return divCont;
 }
 </script>
