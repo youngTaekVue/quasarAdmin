@@ -20,6 +20,7 @@
       <div class="col-12 col-xs-12 col-md-6 col-lg-3 q-pa-sm">
         <q-card class="my-card fit q-pa-md">
           <div class="q-gutter-md">
+            <p class="text-subtitle1 text-center">선택한 JSON Data</p>
             <q-select
               v-model="model"
               outlined
@@ -69,18 +70,35 @@
           </q-scroll-area>
         </q-card>
       </div>
-      <div class="col-12 col-xs-12 col-md-6 col-lg-3 q-pa-sm">
+      <div class="col-12 col-xs-12 col-md-6 col-lg-6 q-pa-sm">
         <q-card class="my-card fit q-pa-md">
+          <p class="text-subtitle1 text-center">JSON API Compare</p>
           <q-scroll-area style="height: 600px">
-            <vue-json-pretty
-              :data="result1"
+            <q-table
+              flat
+              bordered
+              :rows="result1"
+              :columns="columns"
+              row-key="name"
+              :rows-per-page-options="[0]"
+            />
+            <br />
+            <!-- <vue-json-pretty
+              :data="result2"
               :showLength="true"
               :showLine="false"
               :show-double-quotes="false"
               outlined
               style="position: relative"
-            />
-            <!-- <q-card v-html="result1"> </q-card> -->
+            /> -->
+            <div>
+              <p class="text-subtitle1 text-center">누락된 항목</p>
+              <q-list dense padding>
+                <q-item clickable v-ripple v-for="item in result2" :key="item">
+                  <q-item-section>{{ item }}</q-item-section>
+                </q-item>
+              </q-list>
+            </div>
           </q-scroll-area>
         </q-card>
       </div>
@@ -102,22 +120,43 @@ const spinVisible = ref(false);
 const getJosn1 = ref();
 const getJosn2 = ref();
 const result1 = ref();
-
-// const getJosn2 = ref(
-//   "[" +
-//     "{" +
-//     "addItem5: null," +
-//     "addItem2: null," +
-//     'addItem1: "1234"' +
-//     "addItem3: null" +
-//     "}" +
-//     "]"
-// );
+const result2 = ref();
 
 selOptions.value = [
   { label: "select option 1", value: "1" },
   { label: "select option 2", value: "2" },
   { label: "select option 3", value: "3" },
+];
+
+const columns = [
+  {
+    name: "index",
+    label: "no",
+    field: (row) => row.index + 1,
+    align: "center",
+    sortable: true,
+  },
+  {
+    name: "name",
+    required: true,
+    label: "API 항목명",
+    align: "left",
+    field: (row) => row.name,
+    sortable: true,
+  },
+  {
+    name: "value",
+    align: "left",
+    label: "Value",
+    field: (row) => row.value,
+    sortable: true,
+  },
+  {
+    name: "remark",
+    align: "center",
+    label: "remark",
+    field: (row) => row.result,
+  },
 ];
 
 onMounted(() => {
@@ -143,31 +182,50 @@ function jsonCompare() {
   const arrKeyTarget2 = [];
   const arrValTarget2 = [];
 
+  const valueTarget1 = [];
   const valueTarget2 = [];
 
   let objecJson = target2Json.split("");
   let parseData = JSON.parse(getJosnParse(objecJson));
 
-  Object.keys(target1Json[0]).forEach((element) => {
-    arrKeyTarget1.push(element);
-  });
+  let addList = {};
+
+  targetForEach(target1Json[0], arrKeyTarget1);
+
+  //targetEntries(parseData[0], arrKeyTarget2, arrValTarget2);
 
   for (let [key, value] of Object.entries(parseData[0])) {
     arrKeyTarget2.push(key);
     arrValTarget2.push(value);
   }
-  let pushList = {};
+
+  let num = 0;
   for (let j = 0; j < arrKeyTarget1.length; j++) {
     for (let k = 0; k < arrKeyTarget2.length; k++) {
       if (arrKeyTarget1[j] == arrKeyTarget2[k]) {
-        pushList[arrKeyTarget2[k]] = arrValTarget2[k];
-        console.dirxml(pushList);
+        let pushList = {};
+
+        pushList.index = num;
+        pushList.name = arrKeyTarget2[k];
+        pushList.value = arrValTarget2[k];
+        pushList.result = true;
+        valueTarget2.push(pushList);
+        num++;
+      } else {
+        console.dirxml("누락");
       }
     }
   }
 
-  valueTarget2.push(pushList);
+  //var obj = { ...arrKeyTarget1, ...arrKeyTarget2 };
+  let difference = arrKeyTarget1.filter((x) => !arrKeyTarget2.includes(x)); // 결과 1
+  // targetForEach(target1Json[0], arrKeyTarget1);
+
+  arrKeyTarget1.push(addList);
+
+  console.dirxml(valueTarget2);
   result1.value = valueTarget2;
+  result2.value = difference;
 }
 
 // "Repairs common JSON errors by replacing incorrect quotes"
@@ -179,17 +237,29 @@ function getJosnParse(array) {
     } else if (array[i] == ",") {
       array[i] = array[i].replace(",", ',"');
     } else if (array[i] == ":") {
-      array[i] = array[i].replace(":", ":");
+      array[i] = array[i].replace(":", '":');
     } else if (array[i] == "\n") {
       array[i] = array[i].replace("\n", "");
     } else if (array[i] == " ") {
       array[i] = array[i].replace(" ", "");
     }
     divCont += array[i];
-    console.dirxml(divCont);
+    //console.dirxml(divCont);
   }
   divCont = divCont.replace(/,"{"/g, ',{"');
 
   return divCont;
 }
+
+function targetForEach(array, target) {
+  Object.keys(array).forEach((element) => {
+    return target.push(element);
+  });
+}
+// function targetForEach(array, target1, target2) {
+//   for (let [key, value] of Object.entries(array[0])) {
+//     target1.push(key);
+//     target2.push(value);
+//   }
+// }
 </script>
