@@ -77,20 +77,16 @@
             <q-table
               flat
               bordered
+              row-key="name"
+              separator="cell"
               :rows="result1"
               :columns="columns"
-              row-key="name"
+              :hideBottom="true"
               :rows-per-page-options="[0]"
+              :card-container-style="{ backgroundColor: '#ff0000' }"
             />
             <br />
-            <!-- <vue-json-pretty
-              :data="result2"
-              :showLength="true"
-              :showLine="false"
-              :show-double-quotes="false"
-              outlined
-              style="position: relative"
-            /> -->
+
             <div>
               <p class="text-subtitle1 text-center">누락된 항목</p>
               <q-list dense padding>
@@ -131,6 +127,7 @@ selOptions.value = [
 const columns = [
   {
     name: "index",
+
     label: "no",
     field: (row) => row.index + 1,
     align: "center",
@@ -150,12 +147,6 @@ const columns = [
     label: "Value",
     field: (row) => row.value,
     sortable: true,
-  },
-  {
-    name: "remark",
-    align: "center",
-    label: "remark",
-    field: (row) => row.result,
   },
 ];
 
@@ -185,47 +176,54 @@ function jsonCompare() {
   const valueTarget1 = [];
   const valueTarget2 = [];
 
-  let objecJson = target2Json.split("");
-  let parseData = JSON.parse(getJosnParse(objecJson));
+  // let objecJson = target2Json.split("");
+  //let parseData = JSON.parse(getJosnParse(objecJson));
 
   let addList = {};
-
-  targetForEach(target1Json[0], arrKeyTarget1);
-
-  //targetEntries(parseData[0], arrKeyTarget2, arrValTarget2);
-
-  for (let [key, value] of Object.entries(parseData[0])) {
-    arrKeyTarget2.push(key);
-    arrValTarget2.push(value);
-  }
-
   let num = 0;
-  for (let j = 0; j < arrKeyTarget1.length; j++) {
-    for (let k = 0; k < arrKeyTarget2.length; k++) {
-      if (arrKeyTarget1[j] == arrKeyTarget2[k]) {
-        let pushList = {};
 
-        pushList.index = num;
-        pushList.name = arrKeyTarget2[k];
-        pushList.value = arrValTarget2[k];
-        pushList.result = true;
-        valueTarget2.push(pushList);
-        num++;
-      } else {
-        console.dirxml("누락");
-      }
-    }
+  // targetForEach(target1Json[0], arrKeyTarget1);
+  console.log(target1Json[0]);
+  for (let [key, value] of Object.entries(target1Json[0])) {
+    arrKeyTarget1.push(key);
+  }
+  for (let k = 0; k < arrKeyTarget1.length; k++) {
+    let pushList = {};
+    pushList.id = num;
+    pushList.name = arrKeyTarget1[k];
+    pushList.option = false;
+    valueTarget1.push(pushList);
+    n++;
   }
 
-  //var obj = { ...arrKeyTarget1, ...arrKeyTarget2 };
-  let difference = arrKeyTarget1.filter((x) => !arrKeyTarget2.includes(x)); // 결과 1
-  // targetForEach(target1Json[0], arrKeyTarget1);
+  console.log(JSON.stringify(valueTarget1));
+  result1.value = valueTarget1;
+  // for (let [key, value] of Object.entries(parseData[0])) {
+  //   arrKeyTarget2.push(key);
+  //   arrValTarget2.push(value);
+  // }
 
-  arrKeyTarget1.push(addList);
+  // for (let j = 0; j < arrKeyTarget1.length; j++) {
+  //   for (let k = 0; k < arrKeyTarget2.length; k++) {
+  //     if (arrKeyTarget1[j] == arrKeyTarget2[k]) {
+  //       let pushList = {};
+  //       pushList.index = num;
+  //       pushList.name = arrKeyTarget2[k];
+  //       pushList.value = arrValTarget2[k];
+  //       valueTarget2.push(pushList);
+  //       num++;
+  //     }
+  //   }
+  // }
 
-  console.dirxml(valueTarget2);
-  result1.value = valueTarget2;
-  result2.value = difference;
+  // let difference1 = arrKeyTarget1.filter((x) => !arrKeyTarget2.includes(x)); // 결과 1
+  // let difference2 = arrKeyTarget2.filter((x) => !arrKeyTarget1.includes(x)); // 결과 1
+
+  // console.dirxml(difference2);
+  // arrKeyTarget1.push(addList);
+
+  // result1.value = valueTarget2;
+  // result2.value = difference1;
 }
 
 // "Repairs common JSON errors by replacing incorrect quotes"
