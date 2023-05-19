@@ -36,8 +36,20 @@
                 </q-item>
               </template>
             </q-select>
-            <q-scroll-area style="height: 600px">
-              <vue-json-pretty
+            <q-scroll-area style="height: 550px">
+              <q-table
+                flat
+                bordered
+                row-key="name"
+                separator="cell"
+                :rows="getJosn1"
+                :columns="columns"
+                :hideBottom="true"
+                :table-class="{ 'q-pa-sm': [true] }"
+                :rows-per-page-options="[0]"
+              />
+
+              <!-- <vue-json-pretty
                 v-if="showText"
                 :data="getJosn1"
                 :showLength="true"
@@ -45,7 +57,7 @@
                 :show-double-quotes="false"
                 outlined
                 style="position: relative"
-              />
+              /> -->
               <q-inner-loading :showing="spinVisible">
                 <q-spinner-gears size="50px" color="primary" />
               </q-inner-loading>
@@ -70,7 +82,7 @@
           </q-scroll-area>
         </q-card>
       </div>
-      <div class="col-12 col-xs-12 col-md-6 col-lg-6 q-pa-sm">
+      <div class="col-12 col-xs-12 col-md-12 col-lg-6 q-pa-sm">
         <q-card class="my-card fit q-pa-md">
           <p class="text-subtitle1 text-center">JSON API Compare</p>
           <q-scroll-area style="height: 600px">
@@ -83,7 +95,6 @@
               :columns="columns"
               :hideBottom="true"
               :rows-per-page-options="[0]"
-              :card-container-style="{ backgroundColor: '#ff0000' }"
             />
             <br />
 
@@ -126,12 +137,15 @@ selOptions.value = [
 
 const columns = [
   {
-    name: "index",
-
+    name: "id",
     label: "no",
-    field: (row) => row.index + 1,
+    field: (row) => row.id + 1,
     align: "center",
     sortable: true,
+    classes: "q-pa-sm",
+    style: "max-width: 50px",
+    headerClasses: "bg-primary text-white",
+    headerStyle: "max-width: 50px",
   },
   {
     name: "name",
@@ -140,13 +154,8 @@ const columns = [
     align: "left",
     field: (row) => row.name,
     sortable: true,
-  },
-  {
-    name: "value",
-    align: "left",
-    label: "Value",
-    field: (row) => row.value,
-    sortable: true,
+    classes: "q-pa-sm",
+    style: "width: 40px",
   },
 ];
 
@@ -176,54 +185,56 @@ function jsonCompare() {
   const valueTarget1 = [];
   const valueTarget2 = [];
 
-  // let objecJson = target2Json.split("");
-  //let parseData = JSON.parse(getJosnParse(objecJson));
+  let objecJson = target2Json.split("");
+  let parseData = JSON.parse(getJosnParse(objecJson));
 
   let addList = {};
+
+  // for (let [key, value] of Object.entries(target1Json)) {
+  //   arrKeyTarget1.push(key);
+  //   arrValTarget1.push(value);
+  // }
+
+  for (let [key, value] of Object.entries(parseData[0])) {
+    arrKeyTarget2.push(key);
+    arrValTarget2.push(value);
+  }
+
+  console.dirxml("===== target1Json =====");
+  console.dirxml(target1Json);
+
   let num = 0;
 
-  // targetForEach(target1Json[0], arrKeyTarget1);
-  console.log(target1Json[0]);
-  for (let [key, value] of Object.entries(target1Json[0])) {
-    arrKeyTarget1.push(key);
+  for (let j = 0; j < target1Json.length; j++) {
+    let testList = {};
+
+    testList = target1Json[j].name;
+
+    arrKeyTarget1.push(testList);
+    for (let k = 0; k < arrKeyTarget2.length; k++) {
+      if (target1Json[j].name == arrKeyTarget2[k]) {
+        let pushList = {};
+        pushList.id = num;
+        pushList.name = arrKeyTarget2[k];
+        pushList.value = arrValTarget2[k];
+
+        valueTarget2.push(pushList);
+        num++;
+      }
+    }
   }
-  for (let k = 0; k < arrKeyTarget1.length; k++) {
-    let pushList = {};
-    pushList.id = num;
-    pushList.name = arrKeyTarget1[k];
-    pushList.option = false;
-    valueTarget1.push(pushList);
-    n++;
-  }
 
-  console.log(JSON.stringify(valueTarget1));
-  result1.value = valueTarget1;
-  // for (let [key, value] of Object.entries(parseData[0])) {
-  //   arrKeyTarget2.push(key);
-  //   arrValTarget2.push(value);
-  // }
+  let difference1 = arrKeyTarget1.filter((x) => !arrKeyTarget2.includes(x)); // 결과 1
+  let difference2 = arrKeyTarget2.filter((x) => !arrKeyTarget1.includes(x)); // 결과 1
 
-  // for (let j = 0; j < arrKeyTarget1.length; j++) {
-  //   for (let k = 0; k < arrKeyTarget2.length; k++) {
-  //     if (arrKeyTarget1[j] == arrKeyTarget2[k]) {
-  //       let pushList = {};
-  //       pushList.index = num;
-  //       pushList.name = arrKeyTarget2[k];
-  //       pushList.value = arrValTarget2[k];
-  //       valueTarget2.push(pushList);
-  //       num++;
-  //     }
-  //   }
-  // }
+  //arrKeyTarget1.push(addList);
 
-  // let difference1 = arrKeyTarget1.filter((x) => !arrKeyTarget2.includes(x)); // 결과 1
-  // let difference2 = arrKeyTarget2.filter((x) => !arrKeyTarget1.includes(x)); // 결과 1
+  valueTarget2.push(difference2);
 
-  // console.dirxml(difference2);
-  // arrKeyTarget1.push(addList);
+  console.log(valueTarget2);
 
-  // result1.value = valueTarget2;
-  // result2.value = difference1;
+  result1.value = valueTarget2;
+  result2.value = difference1;
 }
 
 // "Repairs common JSON errors by replacing incorrect quotes"
