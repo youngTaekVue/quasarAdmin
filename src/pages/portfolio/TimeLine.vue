@@ -66,6 +66,16 @@
           아닌 다른 방법이 필요할듯.
         </div>
       </q-timeline-entry>
+      <q-timeline-entry
+        title=" Skeleton 적용"
+        subtitle="May 30, 2023"
+        side="right"
+      >
+        <div>
+          Skeleton 적용<br />
+          어떻게 적용해야될지... 고민은 있었지만 막상 해보니 간단한 작업이였다.
+        </div>
+      </q-timeline-entry>
     </q-timeline>
   </div>
 </template>

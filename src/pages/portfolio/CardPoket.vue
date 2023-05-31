@@ -4,49 +4,54 @@
       flat
       bordered
       class="col-3 col-md-3 bg-grey-1 ellipsis my-card"
+      v-show="skeleton"
+      v-for="item in itemList"
+      :key="item"
+    >
+      <q-item>
+        <q-item-section avatar>
+          <q-skeleton type="QAvatar" />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label caption>
+            <q-skeleton type="text" />
+          </q-item-label>
+        </q-item-section>
+      </q-item>
+      <q-card-actions class="q-gutter-md">
+        <q-skeleton type="QBtn" />
+        <q-skeleton type="QBtn" />
+      </q-card-actions>
+    </q-card>
+
+    <q-card
+      flat
+      bordered
+      class="col-3 col-md-3 bg-grey-1 ellipsis my-card"
       v-for="item in poketList"
       :key="item.id"
     >
-      <q-card-section>
-        <div class="text-overline text-orange-9">Overline</div>
+      <q-item>
+        <q-item-section avatar>
+          <q-avatar>
+            <q-img class="cursor-pointer" :src="item.imageUrl" :ratio="16 / 20">
+              <div class="text-subtitle2 absolute-bottom text-center">
+                <div class="text-h5 q-mt-sm q-mb-xs ellipsis">
+                  {{ item.name }}
+                </div>
+              </div>
+            </q-img>
+          </q-avatar>
+        </q-item-section>
+        <q-item-section>
+          <q-item-label> {{ item.imageUrl }} </q-item-label>
+        </q-item-section>
+      </q-item>
 
-        <!-- <q-img class="cursor-pointer" :src="item.imageUrl" :ratio="16 / 20">
-          <div class="text-subtitle2 absolute-bottom text-center">
-            <div class="text-h5 q-mt-sm q-mb-xs ellipsis">{{ item.name }}</div>
-          </div>
-        </q-img> -->
-
-        <div class="text-caption text-grey ellipsis">
-          {{ item.imageUrl }}
-          <q-skeleton type="text" />
-        </div>
-      </q-card-section>
-
-      <q-card-actions>
+      <q-card-actions class="q-gutter-md">
         <q-btn flat color="dark" label="Share" />
         <q-btn flat color="primary" label="Book" />
-
-        <q-space />
-
-        <q-btn
-          color="grey"
-          round
-          flat
-          dense
-          :icon="expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
-          @click="expand()"
-        />
-        <!-- @click="expanded = !expanded" -->
       </q-card-actions>
-
-      <q-slide-transition>
-        <div v-show="expanded">
-          <q-separator />
-          <q-card-section class="text-subitle2">
-            {{ item.body }}
-          </q-card-section>
-        </div>
-      </q-slide-transition>
     </q-card>
   </div>
 </template>
@@ -56,6 +61,8 @@ import { onMounted, ref } from "vue";
 import { api } from "boot/axios";
 
 const poketList = ref(null);
+const itemList = ref(null);
+
 const expanded = ref(false);
 let skeleton = true;
 
@@ -71,6 +78,7 @@ function getPoketList() {
       arrTarget = response.data.results;
       console.log(arrTarget);
       setPoketImage(arrTarget);
+      itemList.value = arrTarget;
     });
 }
 

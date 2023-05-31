@@ -1,8 +1,8 @@
 <template>
   <div class="q-pa-md q-gutter-sm">
     <q-breadcrumbs>
-      <q-breadcrumbs-el label="Components" />
-      <q-breadcrumbs-el label="ApexChart" />
+      <q-breadcrumbs-el label="CustomTable" to="/portfolio/CustomTable" />
+      <q-breadcrumbs-el label="ApexChart" to="/components/ApexChart" />
     </q-breadcrumbs>
   </div>
   <div class="q-pa-xs">
@@ -17,7 +17,7 @@
           </p>
         </q-card>
       </div>
-      <div class="col-12 col-xs-12 col-md-6 col-lg-3 q-pa-sm">
+      <div class="col-12 col-xs-12 col-sm-6 col-md-6 col-lg-3 q-pa-sm">
         <q-card class="my-card fit q-pa-md">
           <div class="q-gutter-md">
             <p class="text-subtitle1 text-center">선택한 JSON Data</p>
@@ -26,7 +26,7 @@
               outlined
               :options="selOptions"
               @update:model-value="onloadJson($event.value)"
-              label="API 항목"
+              label="표준 API 항목"
             >
               <template v-slot:no-option>
                 <q-item>
@@ -45,27 +45,29 @@
                 :rows="getJosn1"
                 :columns="columns"
                 :hideBottom="true"
-                :table-class="{ 'q-pa-sm': [true] }"
                 :rows-per-page-options="[0]"
-              />
-
-              <!-- <vue-json-pretty
-                v-if="showText"
-                :data="getJosn1"
-                :showLength="true"
-                :showLine="false"
-                :show-double-quotes="false"
-                outlined
-                style="position: relative"
-              /> -->
-              <q-inner-loading :showing="spinVisible">
-                <q-spinner-gears size="50px" color="primary" />
-              </q-inner-loading>
+                :card-container-style="{ backgroundColor: '#ff0000' }"
+                class="josnTable1"
+              >
+                <template v-slot:body="props">
+                  <q-tr :props="props">
+                    <q-td key="name" :props="props">
+                      {{ props.row.name }}
+                    </q-td>
+                    <q-td key="option" :props="props">
+                      {{ props.row.option }}
+                    </q-td>
+                  </q-tr>
+                </template>
+                <q-inner-loading :showing="spinVisible">
+                  <q-spinner-gears size="50px" color="primary" />
+                </q-inner-loading>
+              </q-table>
             </q-scroll-area>
           </div>
         </q-card>
       </div>
-      <div class="col-12 col-xs-12 col-md-6 col-lg-3 q-pa-sm">
+      <div class="col-12 col-xs-12 col-sm-6 col-md-6 col-lg-3 q-pa-sm">
         <q-card class="my-card fit q-pa-md">
           <q-field class="q-pb-sm" borderless placeholder="Placeholder">
             <template v-slot:append>
@@ -92,9 +94,9 @@
               row-key="name"
               separator="cell"
               :rows="result1"
-              :columns="columns"
-              :hideBottom="true"
+              :columns="columns2"
               :rows-per-page-options="[0]"
+              :grid="layout"
             />
             <br />
 
@@ -114,9 +116,10 @@
 </template>
 
 <script setup>
-import VueJsonPretty from "vue-json-pretty";
-import "vue-json-pretty/lib/styles.css";
-import { onMounted, ref } from "vue";
+// import VueJsonPretty from "vue-json-pretty";
+// import "vue-json-pretty/lib/styles.css";
+import { Screen } from "quasar";
+import { ref, computed, onMounted } from "vue";
 import { useJsonStore } from "stores/custom";
 //import { api } from "boot/axios";
 const model = ref(null);
@@ -129,6 +132,10 @@ const getJosn2 = ref();
 const result1 = ref();
 const result2 = ref();
 
+const layout = computed(() => {
+  return Screen.lt.sm ? true : Screen.lt.md ? false : false;
+});
+
 selOptions.value = [
   { label: "select option 1", value: "1" },
   { label: "select option 2", value: "2" },
@@ -137,6 +144,23 @@ selOptions.value = [
 
 const columns = [
   {
+    name: "name",
+    required: true,
+    label: "API 항목명",
+    align: "left",
+    sortable: true,
+    classes: "q-pa-sm",
+    style: "width: 40px",
+  },
+  {
+    name: "option",
+    label: "Option",
+    align: "left",
+    classes: "q-pa-sm",
+  },
+];
+const columns2 = [
+  {
     name: "id",
     label: "no",
     field: (row) => row.id + 1,
@@ -144,18 +168,28 @@ const columns = [
     sortable: true,
     classes: "q-pa-sm",
     style: "max-width: 50px",
-    headerClasses: "bg-primary text-white",
     headerStyle: "max-width: 50px",
   },
   {
     name: "name",
     required: true,
-    label: "API 항목명",
+    label: "표준 항목",
     align: "left",
-    field: (row) => row.name,
-    sortable: true,
-    classes: "q-pa-sm",
-    style: "width: 40px",
+    field: (row) => row.bName,
+  },
+  {
+    name: "name",
+    required: true,
+    label: "비교하는 항목",
+    align: "left",
+    field: (row) => row.aName,
+  },
+  {
+    name: "name",
+    required: true,
+    label: "값",
+    align: "left",
+    field: (row) => row.aValue,
   },
 ];
 
@@ -167,8 +201,16 @@ function onloadJson(param) {
   getJosn1.value = "";
   spinVisible.value = true;
 
+  getJosn1.value = "";
   let prettyJson = useJsonStore(param);
 
+  prettyJson.forEach((element, i) => {
+    let iterator = element.option;
+    if (iterator != false) {
+      prettyJson[i].option = JSON.stringify(iterator);
+    }
+  });
+  console.log(prettyJson);
   showText.value = true;
   spinVisible.value = false;
   getJosn1.value = prettyJson;
@@ -200,23 +242,30 @@ function jsonCompare() {
     arrValTarget2.push(value);
   }
 
-  console.dirxml("===== target1Json =====");
-  console.dirxml(target1Json);
+  // console.dirxml("===== target1Json =====");
+  // console.dirxml(target1Json);
 
   let num = 0;
 
   for (let j = 0; j < target1Json.length; j++) {
-    let testList = {};
+    let target1Name = {};
+    //let target1Option = [];
 
-    testList = target1Json[j].name;
+    target1Name = target1Json[j].name;
+    //target1Option = target1Json[j].option;
 
-    arrKeyTarget1.push(testList);
+    //console.dirxml(target1Option);
+
+    arrKeyTarget1.push(target1Name);
     for (let k = 0; k < arrKeyTarget2.length; k++) {
       if (target1Json[j].name == arrKeyTarget2[k]) {
         let pushList = {};
         pushList.id = num;
-        pushList.name = arrKeyTarget2[k];
-        pushList.value = arrValTarget2[k];
+        pushList.bName = target1Json[j].name;
+        pushList.aName = arrKeyTarget2[k];
+        pushList.aValue = arrValTarget2[k];
+
+        console.dirxml(target1Json[j].option);
 
         valueTarget2.push(pushList);
         num++;
@@ -259,16 +308,35 @@ function getJosnParse(array) {
 
   return divCont;
 }
-
-function targetForEach(array, target) {
-  Object.keys(array).forEach((element) => {
-    return target.push(element);
-  });
-}
-// function targetForEach(array, target1, target2) {
-//   for (let [key, value] of Object.entries(array[0])) {
-//     target1.push(key);
-//     target2.push(value);
-//   }
-// }
 </script>
+
+
+
+
+<style lang="sass">
+.josnTable1
+  /* height or max-height is important */
+  height: 550px
+
+  .q-table__top,
+  .q-table__bottom,
+  thead tr:first-child th
+    /* bg color is important for th; just specify one */
+    background-color: #EAEAEA
+
+  thead tr th
+    position: sticky
+    z-index: 1
+  thead tr:first-child th
+    top: 0
+
+  /* this is when the loading indicator appears */
+  &.q-table--loading thead tr:last-child th
+    /* height of all previous header rows */
+    top: 48px
+
+  /* prevent scrolling behind sticky top row on focus */
+  tbody
+    /* height of all previous header rows */
+    scroll-margin-top: 48px
+</style>
