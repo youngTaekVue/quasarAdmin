@@ -8,11 +8,11 @@
   </div>
   <div class="q-pa-xs">
     <div class="row">
-      <Cardtype2 />
+      <Cardtype1 />
     </div>
   </div>
 </template>
 <script setup>
 // import Cardtype1 from "src/components/card/Cardtype1.vue";
-import Cardtype2 from "src/components/card/Cardtype2.vue";
+// import Cardtype2 from "src/components/card/PoketCard.vue";
 </script>

@@ -1,70 +1,14 @@
 <template>
-  <div class="q-pa-md row items-start q-gutter-md">
-    <q-card
-      flat
-      bordered
-      class="col-3 col-md-3 bg-grey-1 ellipsis my-card"
-      v-show="skeleton"
-      v-for="item in itemList"
-      :key="item"
-    >
-      <q-item>
-        <q-item-section avatar>
-          <q-skeleton type="QAvatar" />
-        </q-item-section>
-        <q-item-section>
-          <q-item-label caption>
-            <q-skeleton type="text" />
-          </q-item-label>
-        </q-item-section>
-      </q-item>
-      <q-card-actions class="q-gutter-md">
-        <q-skeleton type="QBtn" />
-        <q-skeleton type="QBtn" />
-      </q-card-actions>
-    </q-card>
-
-    <q-card
-      flat
-      bordered
-      class="col-3 col-md-3 bg-grey-1 ellipsis my-card"
-      v-for="item in poketList"
-      :key="item.id"
-    >
-      <q-item>
-        <q-item-section avatar>
-          <q-avatar>
-            <q-img class="cursor-pointer" :src="item.imageUrl" :ratio="16 / 20">
-              <div class="text-subtitle2 absolute-bottom text-center">
-                <div class="text-h5 q-mt-sm q-mb-xs ellipsis">
-                  {{ item.name }}
-                </div>
-              </div>
-            </q-img>
-          </q-avatar>
-        </q-item-section>
-        <q-item-section>
-          <q-item-label> {{ item.imageUrl }} </q-item-label>
-        </q-item-section>
-      </q-item>
-
-      <q-card-actions class="q-gutter-md">
-        <q-btn flat color="dark" label="Share" />
-        <q-btn flat color="primary" label="Book" />
-      </q-card-actions>
-    </q-card>
+  <div class="row">
+    <PoketCard v-for="item in poketList" :key="item.name" :data="item" />
   </div>
 </template>
 
 <script setup>
+import PoketCard from "components/card/PoketCard.vue";
 import { onMounted, ref } from "vue";
 import { api } from "boot/axios";
-
 const poketList = ref(null);
-const itemList = ref(null);
-
-const expanded = ref(false);
-let skeleton = true;
 
 onMounted(() => {
   getPoketList();
@@ -76,9 +20,7 @@ function getPoketList() {
     .get("https://pokeapi.co/api/v2/pokemon?limit=50&offset=0")
     .then(function (response) {
       arrTarget = response.data.results;
-      console.log(arrTarget);
       setPoketImage(arrTarget);
-      itemList.value = arrTarget;
     });
 }
 
@@ -96,7 +38,8 @@ async function setPoketImage(array) {
         });
     }
   }
-  skeleton = false;
+  //skeleton = false;
   poketList.value = array;
+  //console.log(poketList.value);
 }
 </script>

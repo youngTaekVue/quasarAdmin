@@ -41,7 +41,7 @@
 <script setup>
 import { Screen } from "quasar";
 import { ref, computed } from "vue";
-import DashCard from "components/DashCard.vue";
+import DashCard from "src/components/card/DashCard.vue";
 import ApexLineChart from "components/charts/ApexLineChart.vue";
 import ChartjsBar from "components/charts/ChartjsBar.vue";
 
