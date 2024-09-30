@@ -27,3 +27,7 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
+*.txt
+
+# public/pdfK001/ 디렉터리에 있는 모든 파일 무시
+public/pdfK001/

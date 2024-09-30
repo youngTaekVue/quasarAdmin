@@ -42,7 +42,7 @@
                 bordered
                 row-key="name"
                 separator="cell"
-                :rows="getJosn1"
+                :rows="optionJson"
                 :columns="columns"
                 :hideBottom="true"
                 :rows-per-page-options="[0]"
@@ -120,14 +120,15 @@
 // import "vue-json-pretty/lib/styles.css";
 import { Screen } from "quasar";
 import { ref, computed, onMounted } from "vue";
+
+// JSON 데이터를 호출하는 JS IMPORT
 import { useJsonStore } from "stores/custom";
+
 //import { api } from "boot/axios";
 const model = ref(null);
 const selOptions = ref();
-const showText = ref(false);
 const spinVisible = ref(false);
-
-const getJosn1 = ref();
+const optionJson = ref();
 const getJosn2 = ref();
 const result1 = ref();
 const result2 = ref();
@@ -137,8 +138,8 @@ const layout = computed(() => {
 });
 
 selOptions.value = [
-  { label: "select option 1", value: "1" },
-  { label: "select option 2", value: "2" },
+  { label: "진료비영수증(통합)", value: "1" },
+  { label: "진료비세부내역서(통합)", value: "2" },
   { label: "select option 3", value: "3" },
 ];
 
@@ -177,12 +178,20 @@ const columns2 = [
     align: "left",
     field: (row) => row.bName,
   },
+
   {
     name: "name",
     required: true,
     label: "비교하는 항목",
     align: "left",
     field: (row) => row.aName,
+  },
+  {
+    name: "name",
+    required: true,
+    label: "비고",
+    align: "left",
+    field: (row) => row.remark,
   },
   {
     name: "name",
@@ -198,26 +207,23 @@ onMounted(() => {
 });
 
 function onloadJson(param) {
-  getJosn1.value = "";
-  spinVisible.value = true;
+  optionJson.value = "";
 
-  getJosn1.value = "";
   let prettyJson = useJsonStore(param);
 
   prettyJson.forEach((element, i) => {
     let iterator = element.option;
     if (iterator != false) {
       prettyJson[i].option = JSON.stringify(iterator);
+      console.log(iterator);
     }
   });
-  console.log(prettyJson);
-  showText.value = true;
-  spinVisible.value = false;
-  getJosn1.value = prettyJson;
+
+  optionJson.value = prettyJson;
 }
 
 function jsonCompare() {
-  const target1Json = getJosn1.value;
+  const target1Json = optionJson.value;
   const target2Json = getJosn2.value; //object 화 시켰다는 가정하에
 
   const arrKeyTarget1 = [];
@@ -229,7 +235,6 @@ function jsonCompare() {
 
   let objecJson = target2Json.split("");
   let parseData = JSON.parse(getJosnParse(objecJson));
-
   let addList = {};
 
   // for (let [key, value] of Object.entries(target1Json)) {
@@ -237,10 +242,11 @@ function jsonCompare() {
   //   arrValTarget1.push(value);
   // }
 
-  for (let [key, value] of Object.entries(parseData[0])) {
-    arrKeyTarget2.push(key);
-    arrValTarget2.push(value);
-  }
+  if (parseData)
+    for (let [key, value] of Object.entries(parseData[0])) {
+      arrKeyTarget2.push(key);
+      arrValTarget2.push(value);
+    }
 
   // console.dirxml("===== target1Json =====");
   // console.dirxml(target1Json);
@@ -254,18 +260,16 @@ function jsonCompare() {
     target1Name = target1Json[j].name;
     //target1Option = target1Json[j].option;
 
-    //console.dirxml(target1Option);
-
     arrKeyTarget1.push(target1Name);
+
     for (let k = 0; k < arrKeyTarget2.length; k++) {
       if (target1Json[j].name == arrKeyTarget2[k]) {
         let pushList = {};
         pushList.id = num;
         pushList.bName = target1Json[j].name;
+        pushList.remark = target1Json[j].remark;
         pushList.aName = arrKeyTarget2[k];
         pushList.aValue = arrValTarget2[k];
-
-        console.dirxml(target1Json[j].option);
 
         valueTarget2.push(pushList);
         num++;
@@ -274,13 +278,6 @@ function jsonCompare() {
   }
 
   let difference1 = arrKeyTarget1.filter((x) => !arrKeyTarget2.includes(x)); // 결과 1
-  let difference2 = arrKeyTarget2.filter((x) => !arrKeyTarget1.includes(x)); // 결과 1
-
-  //arrKeyTarget1.push(addList);
-
-  valueTarget2.push(difference2);
-
-  console.log(valueTarget2);
 
   result1.value = valueTarget2;
   result2.value = difference1;

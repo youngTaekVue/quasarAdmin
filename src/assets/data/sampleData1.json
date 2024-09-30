@@ -1,13 +1,395 @@
 [{
-    "issueNo": "",
-    "addItem1": "",
-    "addItem2": "",
-    "addItem3": "",
-    "addItem4": "",
-    "addItem5": "",
-    "addItemAmt1": "",
-    "addItemAmt2": "",
-    "addItemAmt3": "",
-    "addItemAmt4": "",
-    "addItemAmt5": ""
-}]
+        "name": "insuranceClaimCd",
+        "option": false,
+        "remark": "보험청구코드"
+    },
+    {
+        "name": "treatCls",
+        "option": [{
+                "value": "O"
+            },
+            {
+                "value": "I"
+            },
+            {
+                "value": "E"
+            }
+        ],
+        "remark": "진료구분"
+    },
+    {
+        "name": "receiptTyNm",
+        "option": false,
+        "remark": "수납구분명"
+    },
+    {
+        "name": "patientId",
+        "option": false,
+        "remark": "환자번호"
+    },
+    {
+        "name": "patientNm",
+        "option": false,
+        "remark": "환자성명"
+    },
+    {
+        "name": "deptCd",
+        "option": false,
+        "remark": "진료과코드"
+    },
+    {
+        "name": "deptNm",
+        "option": false,
+        "remark": "진료과 명"
+    },
+    {
+        "name": "doctorNm",
+        "option": false,
+        "remark": "의사 명"
+    },
+    {
+        "name": "startDt",
+        "option": false,
+        "remark": "시작일자"
+    },
+    {
+        "name": "startTm",
+        "option": false,
+        "remark": "시작시각"
+    },
+    {
+        "name": "endDt",
+        "option": false,
+        "remark": "종료일자"
+    },
+    {
+        "name": "endTm",
+        "option": false,
+        "remark": "종료시각"
+    },
+    {
+        "name": "nightHolidayYn",
+        "option": false,
+        "remark": "야간(공휴일)진료여부"
+    },
+    {
+        "name": "roomNm",
+        "option": false,
+        "remark": "병실번호"
+    },
+    {
+        "name": "insureKindNm",
+        "option": false,
+        "remark": "환자유형"
+    },
+    {
+        "name": "subType",
+        "option": false,
+        "remark": "보조구분"
+    },
+    {
+        "name": "diseaseGrpNo",
+        "option": false,
+        "remark": "질병군코드"
+    },
+    {
+        "name": "upperLmtExcdAmt",
+        "option": false,
+        "remark": "상한초과금액"
+    },
+    {
+        "name": "selectMedicalYn",
+        "option": false,
+        "remark": "선택진료신청"
+    },
+    {
+        "name": "hospitalCls",
+        "option": false,
+        "remark": "요양기관종류"
+    },
+    {
+        "name": "cashBillCardNo",
+        "option": false,
+        "remark": "현금영수증 신분확인번호"
+    },
+    {
+        "name": "cashApprovalNo",
+        "option": false,
+        "remark": "현금영수증 현금승인번호"
+    },
+    {
+        "name": "cardKindNm",
+        "option": false,
+        "remark": "신용카드 카드종류"
+    },
+    {
+        "name": "cardNo",
+        "option": false,
+        "remark": "신용카드 카드번호"
+    },
+    {
+        "name": "installmentPeriod",
+        "option": false,
+        "remark": "신용카드 할부기간"
+    },
+    {
+        "name": "approvalNo",
+        "option": false,
+        "remark": "신용카드 승인번호"
+    },
+    {
+        "name": "receiptTm",
+        "option": false,
+        "remark": "수납시간"
+    },
+    {
+        "name": "receiptConfirm",
+        "option": false,
+        "remark": "수납확인"
+    },
+    {
+        "name": "totalAmt",
+        "option": false,
+        "remark": "진료비총액"
+    },
+    {
+        "name": "patientTotalAmt",
+        "option": false,
+        "remark": "환자부담총액"
+    },
+    {
+        "name": "surtax",
+        "option": false,
+        "remark": "부가가치세"
+    },
+    {
+        "name": "preAmt",
+        "option": false,
+        "remark": "이미납부한금액"
+    },
+    {
+        "name": "outpatientAmt",
+        "option": false,
+        "remark": "외래정산액"
+    },
+    {
+        "name": "discountAmt",
+        "option": false,
+        "remark": "할인액"
+    },
+    {
+        "name": "bloodAmt",
+        "option": false,
+        "remark": "헌혈보상액"
+    },
+    {
+        "name": "wellnessAmt",
+        "option": false,
+        "remark": "건강생활유지비"
+    },
+    {
+        "name": "reservationAmt",
+        "option": false,
+        "remark": "예약진찰료"
+    },
+    {
+        "name": "realAmt",
+        "option": false,
+        "remark": "납부할금액"
+    },
+    {
+        "name": "preAmtCard",
+        "option": false,
+        "remark": "납부한금액(카드)"
+    },
+    {
+        "name": "preAmtCashBillcard",
+        "option": false,
+        "remark": "납부한금액(현금영수증)"
+    },
+    {
+        "name": "preAmtCash",
+        "option": false,
+        "remark": "납부한금액(현금)"
+    },
+    {
+        "name": "receiptAmt",
+        "option": false,
+        "remark": "납부한금액(합계)"
+    },
+    {
+        "name": "paymentTargetAmt",
+        "option": false,
+        "remark": "납부하지 않은 금액"
+    },
+    {
+        "name": "preAmtCheck",
+        "option": false,
+        "remark": "현재까지 납부한 총금액"
+    },
+    {
+        "name": "receivableAmt",
+        "option": false,
+        "remark": "미수금(지원금)"
+    },
+    {
+        "name": "receiptNo",
+        "option": false,
+        "remark": "접수번호"
+    },
+    {
+        "name": "billNo",
+        "option": false,
+        "remark": "영수증 번호"
+    },
+    {
+        "name": "futureAmt",
+        "option": false,
+        "remark": "후불 금액"
+    },
+    {
+        "name": "franchiseeNo",
+        "option": false,
+        "remark": "신용카드 가맹점번호"
+    },
+    {
+        "name": "cashTyNm",
+        "option": false,
+        "remark": "현금영수증 구분명"
+    },
+    {
+        "name": "issueDtTm",
+        "option": false,
+        "remark": "발행일시"
+    },
+    {
+        "name": "receiptNm",
+        "option": false,
+        "remark": "수납자"
+    },
+    {
+        "name": "rareSupportfund",
+        "option": false,
+        "remark": "희귀지원금"
+    },
+    {
+        "name": "customerNm",
+        "option": false,
+        "remark": "계약처명"
+    },
+    {
+        "name": "insureAmt",
+        "option": false,
+        "remark": "공단부담금 합계"
+    },
+    {
+        "name": "patientAmt",
+        "option": false,
+        "remark": "본인부담금(급여) 합계"
+    },
+    {
+        "name": "fullPatientAmt",
+        "option": false,
+        "remark": "전액본인부담계 합계"
+    },
+    {
+        "name": "selectMedicalAmt",
+        "option": false,
+        "remark": "선택진료료(비급여) 합계"
+    },
+    {
+        "name": "exceptSelectMedicalAmt",
+        "option": false,
+        "remark": "선택진료료이외계(비급여) 합계"
+    },
+    {
+        "name": "remark",
+        "option": false,
+        "remark": "비고"
+    },
+    {
+        "name": "cardValidity",
+        "option": false,
+        "remark": "신용카드 유효기간"
+    },
+    {
+        "name": "cardPayment",
+        "option": false,
+        "remark": "신용카드 결제금액"
+    },
+    {
+        "name": "cardNo2",
+        "option": false,
+        "remark": "신용카드 2"
+    },
+    {
+        "name": "cardNo3",
+        "option": false,
+        "remark": "신용카드 3"
+    },
+    {
+        "name": "etcAmtNm",
+        "option": false,
+        "remark": "기타금액명칭"
+    },
+    {
+        "name": "etcAmt",
+        "option": false,
+        "remark": "기타금액"
+    },
+    {
+        "name": "issueNo",
+        "option": false,
+        "remark": "발행번호"
+    },
+    {
+        "name": "addItem1",
+        "option": false,
+        "remark": "예비항목"
+    },
+    {
+        "name": "addItem2",
+        "option": false,
+        "remark": "예비항목"
+    },
+    {
+        "name": "addItem3",
+        "option": false,
+        "remark": "예비항목"
+    },
+    {
+        "name": "addItem4",
+        "option": false,
+        "remark": "예비항목"
+    },
+    {
+        "name": "addItem5",
+        "option": false,
+        "remark": "예비항목"
+    },
+    {
+        "name": "addItemAmt1",
+        "option": false,
+        "remark": "예비항목"
+    },
+    {
+        "name": "addItemAmt2",
+        "option": false,
+        "remark": "예비항목"
+    },
+    {
+        "name": "addItemAmt3",
+        "option": false,
+        "remark": "예비항목"
+    },
+    {
+        "name": "addItemAmt4",
+        "option": false,
+        "remark": "예비항목"
+    },
+    {
+        "name": "addItemAmt5",
+        "option": false,
+        "remark": "예비항목"
+    }
+]

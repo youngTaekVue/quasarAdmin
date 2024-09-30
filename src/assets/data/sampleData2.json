@@ -1,8 +1,182 @@
 [
   {
-    "name": "Frozen Yogurt",
-    "calories": 159,
-    "fat": 6.0,
-    "carbs": 24
+    "name": "patientId",
+    "option": false
+  },
+  {
+    "name": "patientNm",
+    "option": false
+  },
+  {
+    "name": "birthDt",
+    "option": false
+  },
+  {
+    "name": "startDt",
+    "option": false
+  },
+  {
+    "name": "startTm",
+    "option": false
+  },
+  {
+    "name": "endDt",
+    "option": false
+  },
+  {
+    "name": "endTm",
+    "option": false
+  },
+  {
+    "name": "deptNm",
+    "option": false
+  },
+  {
+    "name": "insureKindNm",
+    "option": false
+  },
+  {
+    "name": "treatCls",
+    "option": false
+  },
+  {
+    "name": "roomNm",
+    "option": false
+  },
+  {
+    "name": "remarks",
+    "option": false
+  },
+  {
+    "name": "applicant",
+    "option": false
+  },
+  {
+    "name": "relation",
+    "option": false
+  },
+  {
+    "name": "certificateIssueDt",
+    "option": false
+  },
+  {
+    "name": "director",
+    "option": false
+  },
+  {
+    "name": "subInsuranceNm",
+    "option": false
+  },
+  {
+    "name": "identificationNo",
+    "option": false
+  },
+  {
+    "name": "age",
+    "option": false
+  },
+  {
+    "name": "gender",
+    "option": false
+  },
+  {
+    "name": "doctorNm",
+    "option": false
+  },
+  {
+    "name": "discountCd",
+    "option": false
+  },
+  {
+    "name": "businessRgstNo",
+    "option": false
+  },
+  {
+    "name": "admissionDays",
+    "option": false
+  },
+  {
+    "name": "roomChangeHist",
+    "option": false
+  },
+  {
+    "name": "totalAmt",
+    "option": false
+  },
+  {
+    "name": "totalPayment",
+    "option": false
+  },
+  {
+    "name": "insureAmt",
+    "option": false
+  },
+  {
+    "name": "patientAmt",
+    "option": false
+  },
+  {
+    "name": "fullPatientAmt",
+    "option": false
+  },
+  {
+    "name": "totalNonPayment",
+    "option": false
+  },
+  {
+    "name": "selectMedicalAmt",
+    "option": false
+  },
+  {
+    "name": "discountAmt",
+    "option": false
+  },
+  {
+    "name": "bloodDiscAmt",
+    "option": false
+  },
+  {
+    "name": "upperLmtExcdAmt",
+    "option": false
+  },
+  {
+    "name": "proxyPayAmt",
+    "option": false
+  },
+  {
+    "name": "patientTotalAmt",
+    "option": false
+  },
+  {
+    "name": "surtax",
+    "option": false
+  },
+  {
+    "name": "payInsurestAmt",
+    "option": false
+  },
+  {
+    "name": "receiptAmt",
+    "option": false
+  },
+  {
+    "name": "addItem1",
+    "option": false
+  },
+  {
+    "name": "addItem2",
+    "option": false
+  },
+  {
+    "name": "addItem3",
+    "option": false
+  },
+  {
+    "name": "addItem4",
+    "option": false
+  },
+  {
+    "name": "addItem5",
+    "option": false
   }
 ]
