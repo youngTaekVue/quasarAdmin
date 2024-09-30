@@ -1,5 +1,6 @@
 .DS_Store
 .thumbs.db
+.vscode
 node_modules
 
 # Quasar core related directories
@@ -16,6 +17,9 @@ node_modules
 /src-capacitor/www
 /src-capacitor/node_modules
 
+# public/pdfK001/ 디렉터리에 있는 모든 파일 무시
+public/pdfK001/
+
 # Log files
 npm-debug.log*
 yarn-debug.log*
@@ -28,6 +32,4 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.txt
-
-# public/pdfK001/ 디렉터리에 있는 모든 파일 무시
-public/pdfK001/
+*.json
